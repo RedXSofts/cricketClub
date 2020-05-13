@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="caf32117-33d6-4bcf-916b-6e2e32dc8462" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/updateScore.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/addMatch.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/addPlayer.php" beforeDir="false" afterPath="$PROJECT_DIR$/addPlayer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/Player.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Player.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/Team.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Team.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,13 +33,14 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\clientTraining" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\cricketClub" />
       <recent name="C:\xampp\htdocs\clientTraining" />
       <recent name="C:\xampp\htdocs\clientTraining\classes" />
       <recent name="C:\xampp\htdocs\clientTraining\img" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\clientTraining" />
     </key>
   </component>
   <component name="SvnConfiguration">
@@ -73,26 +70,42 @@
       <workItem from="1580904402710" duration="242000" />
       <workItem from="1580904686576" duration="106000" />
       <workItem from="1589320760511" duration="5021000" />
-      <workItem from="1589370068528" duration="4954000" />
+      <workItem from="1589370068528" duration="6524000" />
     </task>
+    <task id="LOCAL-00001" summary="master">
+      <created>1589375039564</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589375039564</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="master" />
+    <option name="LAST_COMMIT_MESSAGE" value="master" />
   </component>
   <component name="WindowStateProjectService">
     <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1580904638355">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.738@0.0.1366.738" timestamp="1580904638355" />
+    <state x="406" y="16" key="CommitChangelistDialog2" timestamp="1589376812034">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="406" y="16" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1589376812034" />
     <state x="604" y="349" key="NewPhpFileDialog" timestamp="1589321224063">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="604" y="349" key="NewPhpFileDialog/0.0.1536.834@0.0.1536.834" timestamp="1589321224063" />
-    <state x="361" y="153" key="Vcs.Push.Dialog.v2" timestamp="1589375021526">
+    <state x="361" y="153" key="Vcs.Push.Dialog.v2" timestamp="1589375052550">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="361" y="153" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1589375021526" />
+    <state x="361" y="153" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1589375052550" />
     <state x="439" y="223" key="com.intellij.ide.util.TipDialog" timestamp="1589320761110">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
