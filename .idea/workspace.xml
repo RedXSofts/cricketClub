@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="caf32117-33d6-4bcf-916b-6e2e32dc8462" name="Default Changelist" comment="" />
+    <list default="true" id="caf32117-33d6-4bcf-916b-6e2e32dc8462" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addMatch.php" beforeDir="false" afterPath="$PROJECT_DIR$/addMatch.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/addPlayer.php" beforeDir="false" afterPath="$PROJECT_DIR$/addPlayer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Player.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Player.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Team.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Team.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +20,9 @@
       <executable />
     </execution>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1WAuygRj0xAbPBSLc8L8KKRRcXT" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -21,6 +31,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -62,6 +73,7 @@
       <workItem from="1580904402710" duration="242000" />
       <workItem from="1580904686576" duration="106000" />
       <workItem from="1589320760511" duration="5021000" />
+      <workItem from="1589370068528" duration="4954000" />
     </task>
     <servers />
   </component>
@@ -77,6 +89,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="604" y="349" key="NewPhpFileDialog/0.0.1536.834@0.0.1536.834" timestamp="1589321224063" />
+    <state x="361" y="153" key="Vcs.Push.Dialog.v2" timestamp="1589375021526">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="361" y="153" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1589375021526" />
     <state x="439" y="223" key="com.intellij.ide.util.TipDialog" timestamp="1589320761110">
       <screen x="0" y="0" width="1536" height="834" />
     </state>

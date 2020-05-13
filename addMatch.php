@@ -44,12 +44,14 @@
 
     <?php
     include_once 'classes/Team.php';
+	$tm=new Team();
     if (isset($_POST['addteam']))
     {
-        $tm=new Team();
-        $team_name=$_POST['team_name'];
-        $location=$_POST['location'];
-        $check = $tm->addTeam($team_name,$location);
+        $team=$_POST['team'];
+		$decision=$_POST['decision'];
+		$stadium=$_POST['stadium'];
+		$over=$_POST['over'];
+        $check = $tm->createMatch($team,$decision,$stadium,$over);
     }
 
     ?>
@@ -69,7 +71,7 @@
                         <b>Add Team</b>
                     </div>
                     <div class="panel-body">
-                        <form role="form" class="col-lg-12" method="post" action="addTeam.php">
+                        <form role="form" class="col-lg-12" method="post" action="addMatch.php">
                                  <div class="row">
                                      <div style="color:red; text-align: center; font-size:16px;"><?php
                                          if (isset($_POST['addteam'])) {
@@ -80,17 +82,42 @@
                                  </div>
                             <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Team Name:</label>
-                                <input class="form-control"  required type="text" name="team_name"  placeholder="Enter Name" />
+                                <label>Select Toss Winning Team:</label>
+								<select class="form-control" name="team" required>
+									<option value="">Choose Team</option>
+									<?php
+									$get=$tm->getAllTeam();
+									if($get)
+									{
+										while ($value=$get->fetch_assoc())
+										{  ?>
+											<option value="<?php echo $value['id']; ?>"><?php echo $value['teamName']; ?></option>
+										<?php }} ?>
+								</select>
                             </div>
+
+								<div class="form-group">
+									<label>Overs:</label>
+									<input class="form-control" name="over" placeholder="Enter Overs" required>
+								</div>
                             
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Location:</label>
-                                    <input class="form-control" required type="text"  name="location" placeholder="Enter Location" />
+                                    <label>Choose Decision:</label>
+                                   <select class="form-control" name="decision" required>
+									   <option value="">Choose Decision</option>
+									   <option value="1">Bating</option>
+									   <option value="0">Bowling</option>
+								   </select>
                                 </div>
-                            </div>
+								<div class="form-group">
+									<label>Stadium:</label>
+									<input class="form-control" name="stadium" placeholder="Enter Stadium" required>
+								</div>
+
+							</div>
+
                             <div class="col-lg-12 text-center">
                             <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Team</button>
                             <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>

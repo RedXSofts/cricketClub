@@ -44,12 +44,12 @@
 
     <?php
     include_once 'classes/Player.php';
+	$pl=new Player();
     if (isset($_POST['addplayer']))
     {
-        $pl=new Player();
-        $player_name=$_POST['player_name'];
-        $team_id=$_POST['team_id'];
-        $check = $pl->addPlayer($player_name,$team_id);
+       $team=$_POST['team'];
+       $players=$_POST['player'];
+       $check=$pl->addPlayer($players,$team);
     }
     ?>
 
@@ -79,18 +79,78 @@
                                   </div>
                                  </div>
 
-                            <div class="col-lg-6">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Player Name:</label>
-                                    <input class="form-control" required type="text"  name="player_name" placeholder="Enter Location" />
+									<select class="form-control" name="team" required>
+										<option value="">Choose Team</option>
+										<?php
+										$pl=$pl->getAllteams();
+										if($pl)
+										{
+											while ($value=$pl->fetch_assoc())
+											{  ?>
+												<option value="<?php echo $value['id']; ?>"><?php echo $value['teamName']; ?></option>
+											<?php }} ?>
+									</select>
                                 </div>
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Team Name:</label>
-                                    <input class="form-control" required type="text"  name="team_id" placeholder="Enter team id" />
-                                </div>
-                            </div>
+                          	<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Player 1: like as Ali (C)</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter player Name" />
+									</div>
+									<div class="form-group">
+										<label>Player 3:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Name" />
+									</div>
+									<div class="form-group">
+										<label>Player 5:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Name" />
+									</div><div class="form-group">
+										<label>Player 7:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Name" />
+									</div>
+									<div class="form-group">
+										<label>Player 9:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Name" />
+									</div>
+									<div class="form-group">
+										<label>Player 11:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Name" />
+									</div>
+
+								</div>
+
+
+								<div class="col-lg-6">
+									<div class="form-group">
+										<label>Player 2: like as Ali (WC)</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Names" />
+									</div>
+									<div class="form-group">
+										<label>Player 4:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Names" />
+									</div>
+									<div class="form-group">
+										<label>Player 6:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Names" />
+									</div>
+									<div class="form-group">
+										<label>Player 8:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Names" />
+									</div>
+									<div class="form-group">
+										<label>Player 10:</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Names" />
+									</div>
+									<div class="form-group">
+										<label>Player 12: Placement Player</label>
+										<input class="form-control" required type="text"  name="player[]" placeholder="Enter  player Names" />
+									</div>
+								</div>
+							</div>
                             <!--  -->
                             <div class="col-lg-12 text-center">
                             <button type="submit" name="addplayer" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Player</button>

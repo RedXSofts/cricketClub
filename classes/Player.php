@@ -13,10 +13,32 @@ class Player
 	}
 
 
-	public function addPlayer($player_name,$team_id)
+	public function addPlayer($players,$team_id)
     {
-        $query = "INSERT INTO players(player_name,team_id) VALUES('$player_name','$team_id')";
-        $result = $this->db->insert($query);
+    	$size=count($players);
+		$counter=0;
+
+		for ($i=0; $i<$size; $i++)
+		{
+			$j=$i+1;
+			$query = "INSERT INTO players(player_name,team_id,position) VALUES('$players[$i]','$team_id','$j')";
+			$result = $this->db->insert($query);
+			$counter++;
+		}
+
+		if($counter==$size)
+		{
+			$update="update team set status=1 where id=$team_id";
+			$this->db->update($update);
+			return "All Players Inserted";
+
+		}
+		else
+		{
+			return "All Players not inserted";
+		}
+
+
     }
     public function updatePlayer($player_name,$team_id, $id)
     {
@@ -29,8 +51,6 @@ class Player
                 $msg = "Players Not Updated";
                 return $msg;
             }
-
-
     }
 
       public function getAllPlayer()
@@ -39,6 +59,15 @@ class Player
         $result=$this->db->select($query);
         return $result;
     }
+
+	public function getAllteams()
+	{
+		$query="select * from team where status=0";
+		$result=$this->db->select($query);
+		return $result;
+	}
+
+
       public function getAllPlayerById($id)
     {
         $query="select * from players where id='$id'";
