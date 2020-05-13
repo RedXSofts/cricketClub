@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="caf32117-33d6-4bcf-916b-6e2e32dc8462" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/api/composer.json</pharConfigPath>
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="ProjectId" id="1WAuygRj0xAbPBSLc8L8KKRRcXT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\clientTraining" />
+      <recent name="C:\xampp\htdocs\clientTraining\classes" />
+      <recent name="C:\xampp\htdocs\clientTraining\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\clientTraining" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="caf32117-33d6-4bcf-916b-6e2e32dc8462" name="Default Changelist" comment="" />
+      <created>1578604976261</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578604976261</updated>
+      <workItem from="1578604977667" duration="8505000" />
+      <workItem from="1578834850240" duration="671000" />
+      <workItem from="1578835675873" duration="7399000" />
+      <workItem from="1579796051785" duration="1471000" />
+      <workItem from="1579878414322" duration="2606000" />
+      <workItem from="1580016745339" duration="2890000" />
+      <workItem from="1580026754122" duration="1689000" />
+      <workItem from="1580048767869" duration="6145000" />
+      <workItem from="1580096574249" duration="4284000" />
+      <workItem from="1580116183167" duration="2153000" />
+      <workItem from="1580128776276" duration="6625000" />
+      <workItem from="1580229494624" duration="2269000" />
+      <workItem from="1580673563622" duration="4319000" />
+      <workItem from="1580902167605" duration="1388000" />
+      <workItem from="1580904402710" duration="242000" />
+      <workItem from="1580904686576" duration="106000" />
+      <workItem from="1589320760511" duration="5021000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1580904638355">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.738@0.0.1366.738" timestamp="1580904638355" />
+    <state x="604" y="349" key="NewPhpFileDialog" timestamp="1589321224063">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="604" y="349" key="NewPhpFileDialog/0.0.1536.834@0.0.1536.834" timestamp="1589321224063" />
+    <state x="439" y="223" key="com.intellij.ide.util.TipDialog" timestamp="1589320761110">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="390" y="197" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1580904784730" />
+    <state x="439" y="223" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1589320761110" />
+  </component>
+</project>
