@@ -86,6 +86,20 @@ Session::checkSession();
                         <li>
                             <a href="matchList.php">Manage Matches</a>
                         </li>
+                        <li>
+                            <a href="addOpener.php">Add Openers</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="##"><i class="fa fa fa-list-alt" aria-hidden="true"></i> Scores<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="addScore.php">Add score</a>
+                        </li>
+                        <li>
+                            <a href="scoreList.php">Manage Score</a>
+                        </li>
                     </ul>
                 </li>
             </ul>

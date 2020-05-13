@@ -73,6 +73,20 @@ class Team
 
 		return $result;
 	}
+    public function getTeamByDecision($decision)
+    {
+        $query="select * from matches where decision=$decision";
+        $result=$this->db->select($query);
+
+        return $result;
+    }
+    public function getAllPlayerByTeam($team_id)
+    {
+        $query="select * from players where team_id=$team_id";
+        $result=$this->db->select($query);
+
+        return $result;
+    }
       public function getAllTeamById($id)
     {
         $query="select * from team where id='$id'";
@@ -87,5 +101,38 @@ class Team
         return $result;
     }
 
+      public function addplayers($players)
+    {
+        $size=count($players);
+        $counter=0;
+
+        for ($i=0; $i<$size; $i++)
+        {
+            $j=$i+1;
+            $query = "INSERT INTO battingtable(player_id,status) VALUES('$players[$i]','1')";
+            $result = $this->db->insert($query);
+            $counter++;
+        }
+        if($counter==$size)
+        {
+            return "Opener Inserted";
+        }else {
+                $msg = "Opener Inserted";
+                return $msg;
+            }
+    }
+
+    public function addbowler($bowler)
+    {
+        $query = "INSERT INTO bowlingtable(player_id,status) VALUES('$bowler','1')";
+        $result = $this->db->insert($query);
+        if($result)
+        {
+            return "bowler Inserted";
+        } else {
+                $msg = "bowler not Inserted";
+                return $msg;
+            }
+    }
 
 }
