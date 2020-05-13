@@ -47,20 +47,29 @@
 	$tm=new Team();
     if (isset($_POST['update']))
     {
-        $runs = 0;
+        $striker=$_POST['striker'];
+
+        $pre_runs = $tm->getRunsByPlayerId($striker);
+
         $runs=$_POST['runs'];
-        $runs += $runs;
+        
 		$runType=$_POST['runType'];
-		$striker=$_POST['striker'];
+		
         $nonStriker=$_POST['nonStriker'];
         $newStriker=$_POST['newStriker'];
         $outPlayer = $_POST['outPlayer'];
 		$newPlayer=$_POST['newPlayer'];
         $bowler=$_POST['bowler'];
         $newBowler=$_POST['newBowler'];
-
+        if ($newStriker) {
+        $tm->updateStriker($newStriker);
+            # code...
+        }
+        if ($runs) {
+        $runs = $pre_runs + $runs;
         $tm->updateRun($runs, $striker, $bowler);
-        $tm->updateStriker($striker);
+        }
+        
         // $check = $tm->createMatch($team,$decision,$stadium,$over);
     }
 
@@ -143,12 +152,13 @@
                                     {
                                         $value=$get->fetch_assoc();
                                     }?>
-                                <input class="form-control" name="striker" placeholder="Enter Overs" value="<?php
+                                <input class="form-control"  placeholder="Enter Overs" value="<?php
 
                                 $get1=$tm->getAllPlayerById($value['player_id']);
                                 $value1=$get1->fetch_assoc();
 
                                  echo $value1['player_name'] ?>" readonly>
+                                 <input type="hidden" name="striker" value="<?php echo $value['player_id']; ?>">
                             </div>
                                     <div class="form-group">
                                     <label>Change Striker:</label>
@@ -183,12 +193,13 @@
                                     {
                                         $value=$get->fetch_assoc();
                                     }?>
-                                <input class="form-control" name="nonStriker" placeholder="Enter Overs" value="<?php
+                                <input class="form-control" name="" placeholder="Enter Overs" value="<?php
 
                                 $get1=$tm->getAllPlayerById($value['player_id']);
                                 $value1=$get1->fetch_assoc();
 
                                  echo $value1['player_name'] ?>" readonly>
+                                 <input type="hidden" name="nonStriker" value="<?php echo $value['player_id']; ?>">
                             </div>
                                 <div class="form-group">
                                     <label>Choose Out Player:</label>

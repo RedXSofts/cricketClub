@@ -197,16 +197,24 @@ class Team
         $query = "update battingtable set striker_status='0'";
             $result = $this->db->update($query);
 
-        $query = "update battingtable set striker_status='1' where player_id = $player_id";
+        $query = "update battingtable set striker_status='1' where player_id = '$player_id'";
             $result = $this->db->update($query);
     }
 
 
     public function updateRun($runs, $striker, $bowler){
-        $query = "update battingtable set runs=$runs where player_id = $striker";
+        $query = "update battingtable set runs=$runs where player_id = '$striker'";
             $result = $this->db->update($query);
 
-        $query = "update battingtable set striker_status='1' where player_id = $player_id";
-            $result = $this->db->update($query);
     }
+
+public function getRunsByPlayerId($striker){
+        $query = "select * from battingtable where player_id = $striker";
+            $result = $this->db->select($query);
+        $result1 = $result->fetch_assoc();
+        return $result1['runs'];
+
+    }
+
 }
+
