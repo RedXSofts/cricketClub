@@ -112,9 +112,13 @@ class Team
             $query = "INSERT INTO battingtable(player_id,status) VALUES('$players[$i]','1')";
             $result = $this->db->insert($query);
             $counter++;
+
+            $query = "update players set status=1 where id='$players[$i]'";
+            $result = $this->db->update($query);
         }
         if($counter==$size)
         {
+
             return "Opener Inserted";
         }else {
                 $msg = "Opener Inserted";
@@ -135,4 +139,74 @@ class Team
             }
     }
 
+    public function getStrikePlayer($striker_status){
+
+        $query="select * from battingtable where striker_status=$striker_status";
+        $result=$this->db->select($query);
+        return $result;
+    }
+      public function getAllPlayerById($id)
+    {
+        $query="select * from players where id='$id'";
+        $result=$this->db->select($query);
+        return $result;
+    }
+
+    public function getBattingPlayer($status){
+
+        $query="select * from battingtable where status=$status";
+        $result=$this->db->select($query);
+        return $result;
+    }
+
+    public function getBowlerPlayer($status){
+
+        $query="select * from bowlingtable where status=$status";
+        $result=$this->db->select($query);
+        return $result;
+    }
+
+
+    public function getDataByQuery($query)
+    {
+        $query=$query;
+        $result=$this->db->select($query);
+        return $result;
+    }
+    public function getAllRecord($table)
+    {
+        $query="select * from $table";
+        $result=$this->db->select($query);
+        return $result;
+    }
+    public function getAllPlayerByStatusAndTeam($status,$team_id)
+    {
+        $query="select * from players where status = $status AND team_id = $team_id";
+        $result=$this->db->select($query);
+        return $result;
+    }
+
+    public function addCteam($team_one,$team_two,$location)
+    {
+        $query = "INSERT INTO cteam(teamAName,teamBName,stadium) VALUES('$team_one','$team_two','$location')";
+        $result = $this->db->insert($query);
+
+    }
+
+    public function updateStriker($player_id){
+        $query = "update battingtable set striker_status='0'";
+            $result = $this->db->update($query);
+
+        $query = "update battingtable set striker_status='1' where player_id = $player_id";
+            $result = $this->db->update($query);
+    }
+
+
+    public function updateRun($runs, $striker, $bowler){
+        $query = "update battingtable set runs=$runs where player_id = $striker";
+            $result = $this->db->update($query);
+
+        $query = "update battingtable set striker_status='1' where player_id = $player_id";
+            $result = $this->db->update($query);
+    }
 }
