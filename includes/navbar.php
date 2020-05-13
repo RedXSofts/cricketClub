@@ -77,6 +77,17 @@ Session::checkSession();
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="##"><i class="fa fa fa-list-alt" aria-hidden="true"></i> Matches<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="addMatch.php">Add Match</a>
+                        </li>
+                        <li>
+                            <a href="matchList.php">Manage Matches</a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- /.sidebar-collapse -->

@@ -43,17 +43,13 @@
     <?php include_once 'includes/navbar.php'?>
 
     <?php
-    include_once 'classes/client.php';
-    if (isset($_POST['addEmp']))
+    include_once 'classes/Team.php';
+    if (isset($_POST['addteam']))
     {
-        $emp=new Client();
-        $name=$_POST['name'];
-        $vatNo=$_POST['vatNo'];
-        $location=$_POST['address'];
-        $landNo=$_POST['landNo'];
-        $email=$_POST['email'];
-        $poNo=$_POST['poNo'];
-        $check = $emp->addClient($name,$vatNo,$location,$landNo,$email,$poNo);
+        $tm=new Team();
+        $team_name=$_POST['team_name'];
+        $location=$_POST['location'];
+        $check = $tm->addTeam($team_name,$location);
     }
 
     ?>
@@ -61,22 +57,22 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Add Client</h1>
+                <h1 class="page-header">Add Team</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-----New Row---->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <b>Add Client</b>
+                        <b>Add Team</b>
                     </div>
                     <div class="panel-body">
-                        <form role="form" class="col-lg-7" method="post" action="addClient.php">
+                        <form role="form" class="col-lg-12" method="post" action="addTeam.php">
                                  <div class="row">
                                      <div style="color:red; text-align: center; font-size:16px;"><?php
-                                         if (isset($_POST['addEmp'])) {
+                                         if (isset($_POST['addteam'])) {
                                              echo "$check";
                                          }
                                          ?>
@@ -84,40 +80,19 @@
                                  </div>
                             <div class="col-lg-6">
                             <div class="form-group">
-                                <label>Name:</label>
-                                <input class="form-control"  required type="text" name="name"  placeholder="Enter Name" />
+                                <label>Team Name:</label>
+                                <input class="form-control"  required type="text" name="team_name"  placeholder="Enter Name" />
                             </div>
-                            <div class="form-group">
-                                <label>Address:</label>
-                                <input class="form-control" required type="text" id="password" name="address" placeholder="Enter Address" />
-                            </div>
-                            </div>
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Vat Number:</label>
-                                <input class="form-control" required type="number" name="vatNo" id="confirm_password" placeholder="Enter Vat number" />
-                            </div>
-                                 <div class="form-group">
-                                    <label>P.O Number:</label>
-                                    <input class="form-control" required type="Number" name="poNo" id="confirm_password" placeholder="Enter Mobile Number" />
-                                </div>
-                            </div>
-                             <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label>Email:(Optional)</label>
-                                    <input class="form-control" type="Email" name="email" id="confirm_password" placeholder="Enter Email Address" />
-                                </div>
-
-                               
+                            
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Landline Number:</label>
-                                    <input class="form-control" required type="Number" name="landNo" id="confirm_password" placeholder="Enter Mobile Number" />
+                                    <label>Location:</label>
+                                    <input class="form-control" required type="text"  name="location" placeholder="Enter Location" />
                                 </div>
                             </div>
-                            <div class="col-lg-8">
-                            <button type="submit" name="addEmp" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Client</button>
+                            <div class="col-lg-12 text-center">
+                            <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Team</button>
                             <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
                             </div>
                         </form>

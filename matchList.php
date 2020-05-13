@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include_once 'classes/client.php';
-$employee=new Client();
+<?php include_once 'classes/Match.php';
+$mat=new Match();
 if(isset($_GET['del']))
 {
-    $employee->delete($_GET['del']);
-    echo '<script>window.location.replace("ClientList.php")</script>';
+    $mat->delete($_GET['del']);
+    echo '<script>window.location.replace("matchList.php")</script>';
 }
 ?>
 
@@ -60,7 +60,7 @@ if(isset($_GET['del']))
         <div id="page-wrapper">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Client Managemenet</h1>
+                    <h1 class="page-header">Match Managemenet</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -69,38 +69,43 @@ if(isset($_GET['del']))
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            Client List
+                            Match List
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                 <tr>
-                                    <th>Client</th>
-                                    <th>Vat No</th>
-                                    <th>Address</th>
-                                    <th>LandLine No</th>
-                                    <th>Email</th>
-                                    <th>P.O Number</th>
+                                    <th>Team A</th>
+                                    <th>Team B</th>
+                                    <th>Toss Wining Team</th>
+                                    <th>Decision</th>
+                                    <th>Status</th>
+                                    <th>Result</th>
+                                    <th>Won by team</th>
+                                    <th>Overs</th>
+
                                     <th>Operation</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <?php
-                                    $employees=$employee->getAllEmplayee();
-                                    if($employees)
+                                    $match=$tm->getAllMatch();
+                                    if($match)
                                     {
-                                        while ($getAll=$employees->fetch_assoc())
+                                        while ($getAll=$match->fetch_assoc())
                                         {
                                 ?>
                                 <tr class="odd gradeX">
-                                    <td><?php echo $getAll['name']; ?></td>
-                                    <td><?php echo $getAll['vatNo']; ?></td>
-                                    <td><textarea class="form-control"><?php echo $getAll['location']; ?></textarea></td>
-                                    <td><?php echo $getAll['landNo']; ?></td>
-                                    <td><?php echo $getAll['email']; ?></td>
-                                    <td><?php echo $getAll['poNo']; ?></td>
-                                    <td><a class="btn btn-primary" href="editClient.php?editEmp=<?php echo $getAll['id']; ?>">Edit</a> <a class="btn btn-danger" onclick="return confirm('Are you sour to delete!')" href="ClientList.php?del=<?php echo $getAll['id'];?>">Delete</a></td>
+                                    <td><?php echo $getAll['teamA']; ?></td>
+                                    <td><?php echo $getAll['teamB']; ?></td>
+                                     <td><?php echo $getAll['toss_team']; ?></td>
+                                    <td><?php echo $getAll['decision']; ?></td>
+                                     <td><?php echo $getAll['status']; ?></td>
+                                    <td><?php echo $getAll['result']; ?></td>
+                                     <td><?php echo $getAll['won_by_team']; ?></td>
+                                    <td><?php echo $getAll['overs']; ?></td>
+                                    <td><a class="btn btn-primary" href="editMatch.php?editteam=<?php echo $getAll['id']; ?>">Edit</a> <a class="btn btn-danger" onclick="return confirm('Are you sure to delete!')" href="matchList.php?del=<?php echo $getAll['id'];?>">Delete</a></td>
                                 </tr>
                                 <?php }} ?>
                                 </tbody>

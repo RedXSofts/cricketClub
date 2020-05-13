@@ -43,85 +43,57 @@
     <?php include_once 'includes/navbar.php'?>
 
     <?php
-    include_once 'classes/client.php';
-      $empId=$_GET['editEmp'];
-       $emp=new Client();
-       $empdate=$emp->getAllClientById($empId);
-           $employee=$empdate->fetch_assoc();
-    if (isset($_POST['addEmp']))
+    include_once 'classes/Player.php';
+    if (isset($_POST['addplayer']))
     {
-      
-        $name=$_POST['name'];
-        $vatNo=$_POST['vatNo'];
-        $location=$_POST['address'];
-        $landNo=$_POST['landNo'];
-        $email=$_POST['email'];
-        $poNo=$_POST['poNo'];
-        $check = $emp->updateClient($empId,$name,$vatNo,$location,$landNo,$email,$poNo);
+        $pl=new Player();
+        $player_name=$_POST['player_name'];
+        $team_id=$_POST['team_id'];
+        $check = $pl->addPlayer($player_name,$team_id);
     }
-
     ?>
 
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Update Client</h1>
+                <h1 class="page-header">Add Player</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-----New Row---->
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <b>Update Client</b>
+                        <b>Add Player</b>
                     </div>
                     <div class="panel-body">
-                        <form role="form" class="col-lg-7" method="post" action="">
+                        <form role="form" class="col-lg-12" method="post" action="addPlayer.php">
                                  <div class="row">
                                      <div style="color:red; text-align: center; font-size:16px;"><?php
-                                         if (isset($_POST['addEmp'])) {
+                                         if (isset($_POST['addplayer'])) {
                                              echo "$check";
                                          }
+
                                          ?>
                                   </div>
                                  </div>
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Name:</label>
-                                <input class="form-control"  required value="<?php echo $employee['name']; ?>" type="text" name="name"  placeholder="Enter Name" />
-                            </div>
-                            <div class="form-group">
-                                <label>Address:</label>
-                                <input class="form-control" required value="<?php echo $employee['location']; ?>" type="text" id="password" name="address" placeholder="Enter Address" />
-                            </div>
-                            </div>
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Vat Number:</label>
-                                <input class="form-control" required value="<?php echo $employee['vatNo']; ?>" type="number" name="vatNo" id="confirm_password" placeholder="Enter Vat number" />
-                            </div>
-                                 <div class="form-group">
-                                    <label>P.O Number:</label>
-                                    <input class="form-control" required value="<?php echo $employee['poNo']; ?>" type="Number" name="poNo" id="confirm_password" placeholder="Enter Mobile Number" />
-                                </div>
-                            </div>
-                             <div class="col-lg-6">
-                                    <div class="form-group">
-                                    <label>Email:(Optional)</label>
-                                    <input class="form-control" type="Email" value="<?php echo $employee['email']; ?>" name="email" id="confirm_password" placeholder="Enter Email Address" />
-                                </div>
 
-                               
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Player Name:</label>
+                                    <input class="form-control" required type="text"  name="player_name" placeholder="Enter Location" />
+                                </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Landline Number:</label>
-                                    <input class="form-control" value="<?php echo $employee['landNo']; ?>" required type="Number" name="landNo" id="confirm_password" placeholder="Enter Mobile Number" />
+                                    <label>Team Name:</label>
+                                    <input class="form-control" required type="text"  name="team_id" placeholder="Enter team id" />
                                 </div>
                             </div>
-                            <div class="col-lg-8">
-                            <button type="submit" name="addEmp" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Update Client</button>
+                            <!--  -->
+                            <div class="col-lg-12 text-center">
+                            <button type="submit" name="addplayer" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Player</button>
                             <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
                             </div>
                         </form>
