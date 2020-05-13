@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="caf32117-33d6-4bcf-916b-6e2e32dc8462" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/updateScore.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/addOpenner.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/commonfunctions.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/info.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/live.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/functions.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,12 +24,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1WAuygRj0xAbPBSLc8L8KKRRcXT" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -70,7 +78,8 @@
       <workItem from="1580904402710" duration="242000" />
       <workItem from="1580904686576" duration="106000" />
       <workItem from="1589320760511" duration="5021000" />
-      <workItem from="1589370068528" duration="6524000" />
+      <workItem from="1589370068528" duration="10669000" />
+      <workItem from="1589406323197" duration="1040000" />
     </task>
     <task id="LOCAL-00001" summary="master">
       <created>1589375039564</created>
@@ -79,13 +88,21 @@
       <option name="project" value="LOCAL" />
       <updated>1589375039564</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="master">
+      <created>1589376825630</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1589376825630</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="master" />
     <option name="LAST_COMMIT_MESSAGE" value="master" />
   </component>
@@ -94,22 +111,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="363" y="100" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1366.738@0.0.1366.738" timestamp="1580904638355" />
-    <state x="406" y="16" key="CommitChangelistDialog2" timestamp="1589376812034">
+    <state x="406" y="16" key="CommitChangelistDialog2" timestamp="1589376824637">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="406" y="16" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1589376812034" />
+    <state x="406" y="16" key="CommitChangelistDialog2/0.0.1536.834@0.0.1536.834" timestamp="1589376824637" />
+    <state width="235" height="442" key="Diff.GoToChangePopup" timestamp="1589406868181">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state width="235" height="442" key="Diff.GoToChangePopup/0.0.1536.834@0.0.1536.834" timestamp="1589406868181" />
+    <state x="147" y="66" key="DiffContextDialog" timestamp="1589406900787">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="147" y="66" key="DiffContextDialog/0.0.1536.834@0.0.1536.834" timestamp="1589406900787" />
     <state x="604" y="349" key="NewPhpFileDialog" timestamp="1589321224063">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="604" y="349" key="NewPhpFileDialog/0.0.1536.834@0.0.1536.834" timestamp="1589321224063" />
-    <state x="361" y="153" key="Vcs.Push.Dialog.v2" timestamp="1589375052550">
+    <state x="613" y="131" key="RollbackChangesDialog" timestamp="1589406904401">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state x="361" y="153" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1589375052550" />
+    <state x="613" y="131" key="RollbackChangesDialog/0.0.1536.834@0.0.1536.834" timestamp="1589406904401" />
+    <state x="361" y="153" key="Vcs.Push.Dialog.v2" timestamp="1589376834819">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="361" y="153" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1589376834819" />
     <state x="439" y="223" key="com.intellij.ide.util.TipDialog" timestamp="1589320761110">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="390" y="197" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1580904784730" />
     <state x="439" y="223" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1589320761110" />
+    <state x="495" y="221" key="git4idea.merge.GitPullDialog" timestamp="1589406922002">
+      <screen x="0" y="0" width="1536" height="834" />
+    </state>
+    <state x="495" y="221" key="git4idea.merge.GitPullDialog/0.0.1536.834@0.0.1536.834" timestamp="1589406922002" />
   </component>
 </project>

@@ -2,7 +2,7 @@
 include_once ("database.php");
 
 $db=new Database();
-$q="select * from teams";
+$q="select * from team";
 $msg=Array();
 $value=$db->select($q);
 
