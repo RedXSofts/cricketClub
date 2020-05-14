@@ -23,6 +23,23 @@ class Team
         return false;
 
 	}
+
+    public function updateStatus($status)
+    {
+        $match = "SELECT * FROM matches limit 1";
+        $res = $this->db->select($match);
+        $res = $res->fetch_assoc();
+        $id = $res['id'];
+
+     $query = "UPDATE matches SET status=$status WHERE id = $id";
+     $result = $this->db->update($query);
+     if ($result){
+         echo "Status updated to".$status;
+     }
+     else{
+         echo "Some Errors occured";
+     }
+	}
 	public function createMatch($team,$decision,$stadium,$over)
 	{
 		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','continue')";
