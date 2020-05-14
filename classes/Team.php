@@ -14,7 +14,7 @@ class Team
 
     public function any_match()
     {
-        $query = "SELECT COUNT(*) as total FROM matches WHERE status= 1";
+        $query = "SELECT COUNT(*) as total FROM matches WHERE status= 'continue'";
         $result = $this->db->select($query);
         $res = $result->fetch_assoc();
         if ($res['total'] > 0){
@@ -25,7 +25,7 @@ class Team
 	}
 	public function createMatch($team,$decision,$stadium,$over)
 	{
-		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','1')";
+		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','continue')";
 		$result = $this->db->insert($query);
 
 		$get=$this->getRemainingTeam($team);
@@ -35,7 +35,7 @@ class Team
 			$decision=0;
 		else $decision=1;
 
-		$query1 = "INSERT INTO matches(team,decision,stadium,over,status) VALUES('$team','$decision','$stadium','$over','1')";
+		$query1 = "INSERT INTO matches(team,decision,stadium,over,status) VALUES('$team','$decision','$stadium','$over','continue')";
 		$result1 = $this->db->insert($query1);
 
 		if($result1)
