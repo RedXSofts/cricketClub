@@ -62,15 +62,16 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-user fa-5x"></i>
+                                    <img src="img/team.png" alt="icon" width="60px" height="60px" />
+
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">1</div>
-                                    <div>Manage Client!</div>
+                                    <div>Team</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="ClientList.php">
+                        <a href="addTeam.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -84,15 +85,15 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-fax fa-5x"></i>
+                                    <img src="img/helmet.png" alt="icon" width="60px" height="60px" />
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">2</div>
-                                    <div>Expense!</div>
+                                    <div>Players</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="expenseList.php">
+                        <a href="addPlayer.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -106,15 +107,16 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-list fa-5x"></i>
+                                    <img src="img/game.png" alt="icon" width="60px" height="60px" />
+
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">3</div>
-                                    <div>Course Management!</div>
+                                    <div>Matches</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="courseList.php">
+                        <a href="addMatch.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -128,15 +130,16 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-support fa-5x"></i>
+                                    <img src="img/score.png" alt="icon" width="60px" height="60px" />
+
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">4</div>
-                                    <div>Sale Report!</div>
+                                    <div>Score Board</div>
                                 </div>
                             </div>
                         </div>
-                        <a href="SaleToday.php">
+                        <a href="addScore.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

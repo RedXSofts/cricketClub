@@ -12,6 +12,28 @@ class Player
 		$this->fm=new Format();
 	}
 
+    public function count_teamA_players()
+    {
+        $team_q1 = "SELECT * FROM team limit 1";
+        $team_res1 = $this->db->select($team_q1);
+        $team_res1 = $team_res1->fetch_assoc();
+        $team_id = $team_res1['id'];
+        $query1 = "SELECT COUNT(*) as teamA FROM players where team_id = $team_id";
+        $player_res1 = $this->db->select($query1);
+        $player_res1 = $player_res1->fetch_assoc();
+        return $player_res1['teamA'];
+	}
+    public function count_teamB_players()
+    {
+        $team_q = "SELECT * FROM team limit 1,1";
+        $team_res = $this->db->select($team_q);
+        $team_res = $team_res->fetch_assoc();
+        $team_id = $team_res['id'];
+        $query = "SELECT COUNT(*) as teamB FROM players where team_id = $team_id";
+        $player_res = $this->db->select($query);
+        $player_res = $player_res->fetch_assoc();
+        return $player_res['teamB'];
+    }
 
 	public function addPlayer($players,$team_id)
     {
