@@ -48,10 +48,9 @@
     if (isset($_POST['statusbtn']))
     {
        // echo '<script>alert("$_POST['status']")</script>';
-        /*$status=$_POST['status'];
-        echo $status;*/
-        print_r($_POST['status']);
-        die;
+        $status=$_POST['status'];
+        // echo $status;
+        // $_POST['status'];
         $check = $tm->updateStatus($status);
     }
 

@@ -26,19 +26,19 @@ class Team
 
     public function updateStatus($status)
     {
-        $match = "SELECT * FROM matches limit 1";
-        $res = $this->db->select($match);
-        $res = $res->fetch_assoc();
-        $id = $res['id'];
+        // $match = "SELECT * FROM matches";
+        // $res = $this->db->select($match);
+        // $res = $res->fetch_assoc();
+        // $id = $res['id'];
 
-     $query = "UPDATE matches SET status=$status WHERE id = $id";
+     $query = "UPDATE matches SET status='$status'";
      $result = $this->db->update($query);
-     if ($result){
-         echo "Status updated to".$status;
-     }
-     else{
-         echo "Some Errors occured";
-     }
+     // if ($result){
+     //     echo "Status updated to".$status;
+     // }
+     // else{
+     //     echo "Some Errors occured";
+     // }
 	}
 	public function createMatch($team,$decision,$stadium,$over)
 	{
