@@ -48,13 +48,8 @@
     if (isset($_POST['update']))
     {
         $striker=$_POST['striker'];
-
-        // $pre_runs = $tm->getRunsByPlayerId($striker);
-
         $runs=$_POST['runs'];
-        
 		$runType=$_POST['runType'];
-		
         $nonStriker=$_POST['nonStriker'];
         $newStriker=$_POST['newStriker'];
         $outPlayer = $_POST['outPlayer'];
@@ -79,6 +74,12 @@
 
             $tm->outPlayer($outPlayer, $newPlayer);
         }
+    }
+    if (isset($_POST['finish'])) {
+
+        $striker=$_POST['striker'];
+
+        $tm->changeTeam($striker);
     }
 
     ?>
@@ -325,9 +326,8 @@
                 <!-- /.panel -->
             </div>
             <div class="col-lg-12 text-center">
-                            <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Update Data</button>
-                            <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
-                            </div>
+                            <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Data</button>
+                            <button type="submit" name="finish" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>
                         </form>
 
         </div>

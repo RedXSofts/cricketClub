@@ -399,6 +399,39 @@ class Team
 
         $query4 = "update score_board set extras='$totallExtras', runs='$runs' where team_id = '$team_id'";
         $result4 = $this->db->update($query4);
+    }
+
+    public function changeTeam($player_id){
+
+        $query3="select * from players where id='$player_id'";
+        $result3=$this->db->select($query3);
+
+        $value = $result3->fetch_assoc();
+        $team_id = $value['team_id'];
+
+        $query = "select * from score_board where team_id = $team_id";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $runs = $value['runs'];
+
+        $target = $runs + 1;
+
+        $query4 = "update score_board set target='$target' where team_id='$team_id'";
+        $team = $this->db->update($query4);
+
+        // $remainingTeam = $this->getRemainingTeam($team_id);
+        $get=$this->getRemainingTeam($team_id);
+        $gets = $get->fetch_assoc();
+        $remainingTeam= $gets['id'];
+
+        $query4 = "update matches set decision=1 where team='$remainingTeam'";
+        $result4 = $this->db->update($query4);
+
+        $query4 = "update bowlingtable set status='0'";
+        $result4 = $this->db->update($query4);
+
+        $query4 = "update battingtable set status='0',striker_status='0'";
+        $result4 = $this->db->update($query4);
 
     }
 }
