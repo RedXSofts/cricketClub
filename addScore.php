@@ -49,7 +49,7 @@
     {
         $striker=$_POST['striker'];
 
-        $pre_runs = $tm->getRunsByPlayerId($striker);
+        // $pre_runs = $tm->getRunsByPlayerId($striker);
 
         $runs=$_POST['runs'];
         
@@ -66,11 +66,19 @@
             # code...
         }
         if ($runs) {
-        $runs = $pre_runs + $runs;
-        $tm->updateRun($runs, $striker, $bowler);
+            if ($runType) {
+                $tm->updateExtras($runs,$striker);
+            }else{
+                $tm->updateRun($runs, $striker, $bowler);
+            }
         }
-        
-        // $check = $tm->createMatch($team,$decision,$stadium,$over);
+        if ($newBowler) {
+            $tm->updateBowler($bowler, $newBowler);
+        }
+        if ($newPlayer) {
+
+            $tm->outPlayer($outPlayer, $newPlayer);
+        }
     }
 
     ?>
@@ -188,7 +196,7 @@
                                 <div class="form-group">
                                 <label>Non Striker:</label>
                                 <?php
-                                    $get=$tm->getStrikePlayer('0');
+                                    $get=$tm->getStrikePlayerAndStatus();
                                     if($get)
                                     {
                                         $value=$get->fetch_assoc();
@@ -238,7 +246,7 @@
                                             $get1=$tm->getAllPlayerByStatusAndTeam('0',$value1['team']);
                                             while($value=$get1->fetch_assoc()){
                                     ?>
-                                            <option value="<?php echo $value['player_id']; ?>"><?php
+                                            <option value="<?php echo $value['id']; ?>"><?php
                                  echo $value['player_name'] ?></option>
                                         <?php }}?>
                                 </select>
@@ -280,12 +288,13 @@
                                     {
                                         $value=$get->fetch_assoc();
                                     }?>
-                                <input class="form-control" name="bowler" placeholder="Enter Overs" value="<?php
+                                <input class="form-control" placeholder="Enter Overs" value="<?php
 
                                 $get1=$tm->getAllPlayerById($value['player_id']);
                                 $value1=$get1->fetch_assoc();
 
                                  echo $value1['player_name'] ?>" readonly>
+                                 <input type="hidden" name="bowler" value="<?php echo $value['player_id']; ?>">
                             </div>
 
                                 <div class="form-group">
@@ -300,7 +309,7 @@
                                             $get1=$tm->getAllPlayerByStatusAndTeam('0',$value1['team']);
                                             while($value=$get1->fetch_assoc()){
                                     ?>
-                                            <option value="<?php echo $value['player_id']; ?>"><?php
+                                            <option value="<?php echo $value['id']; ?>"><?php
                                  echo $value['player_name'] ?></option>
                                         <?php }}?>
                                 </select>

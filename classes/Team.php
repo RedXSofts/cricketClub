@@ -17,6 +17,10 @@ class Team
 		$query = "INSERT INTO matches(team,toss,decision,stadium,over) VALUES('$team','1','$decision','$stadium','$over')";
 		$result = $this->db->insert($query);
 
+
+        $query2 = "INSERT INTO score_board(team_id) VALUES('$team')";
+        $result2 = $this->db->insert($query2);
+
 		$get=$this->getRemainingTeam($team);
 		$gets=$get->fetch_assoc();
 		$team=$gets['id'];
@@ -26,6 +30,9 @@ class Team
 
 		$query1 = "INSERT INTO matches(team,decision,stadium,over) VALUES('$team','$decision','$stadium','$over')";
 		$result1 = $this->db->insert($query1);
+
+        $query3 = "INSERT INTO score_board(team_id) VALUES('$team')";
+        $result3 = $this->db->insert($query3);
 
 		if($result1)
 		{
@@ -109,8 +116,15 @@ class Team
         for ($i=0; $i<$size; $i++)
         {
             $j=$i+1;
-            $query = "INSERT INTO battingtable(player_id,status) VALUES('$players[$i]','1')";
+            if ($i == 0) {
+                $query = "INSERT INTO battingtable(player_id,status,striker_status) VALUES('$players[$i]','1','1')";
             $result = $this->db->insert($query);
+            }
+            else{
+                $query = "INSERT INTO battingtable(player_id,status) VALUES('$players[$i]','1')";
+            $result = $this->db->insert($query);
+            }
+            
             $counter++;
 
             $query = "update players set status=1 where id='$players[$i]'";
@@ -145,6 +159,13 @@ class Team
         $result=$this->db->select($query);
         return $result;
     }
+
+    public function getStrikePlayerAndStatus(){
+        $query="select * from battingtable where striker_status='0' AND status = '1'";
+        $result=$this->db->select($query);
+        return $result;
+    }
+
       public function getAllPlayerById($id)
     {
         $query="select * from players where id='$id'";
@@ -202,19 +223,183 @@ class Team
     }
 
 
-    public function updateRun($runs, $striker, $bowler){
-        $query = "update battingtable set runs=$runs where player_id = '$striker'";
-            $result = $this->db->update($query);
+    
 
+    public function updateBowler($bowler, $newBowler){
+
+        $query = "update bowlingtable set status = '0' where player_id = '$bowler'";
+        $result = $this->db->update($query);
+
+        $query2="select * from bowlingtable where player_id='$newBowler'";
+        $result2=$this->db->select($query2);
+
+        if ($result2) {
+           $query3 = "update bowlingtable set status = '1' where player_id='$newBowler'";
+           $result3 = $this->db->update($query3);
+        }
+        else{
+            $query4 = "INSERT INTO bowlingtable(player_id,status) VALUES('$newBowler','1')";
+
+            $result = $this->db->insert($query4);
+        }
+
+        
     }
 
-public function getRunsByPlayerId($striker){
-        $query = "select * from battingtable where player_id = $striker";
+    public function outPlayer($outPlayer, $newPlayer){
+
+        $query2="select * from battingtable where player_id='$outPlayer'";
+        $result2=$this->db->select($query2);
+
+        if ($result2!=false) {
+           $query = "update battingtable set status = '0', striker_status = '0' where player_id='$outPlayer'";
+            $result = $this->db->update($query);
+
+            $value = $result2->fetch_assoc();
+            if ($value['striker_status'] == 1) {
+                $query2 = "INSERT INTO battingtable(player_id,status,striker_status) VALUES('$newPlayer','1','1')";
+                $result2 = $this->db->insert($query2);
+            }else{
+                $query2 = "INSERT INTO battingtable(player_id,status) VALUES('$newPlayer','1')";
+                $result2 = $this->db->insert($query2);
+            }
+        }
+        $query3 = "update players set status='1' where id='$newPlayer'";
+        $result3 = $this->db->update($query3);  
+    }
+
+    public function getRunsByPlayerId($player_id, $table){
+        $query = "select * from $table where player_id = $player_id";
             $result = $this->db->select($query);
         $result1 = $result->fetch_assoc();
         return $result1['runs'];
 
     }
 
+    public function updateRun($runs, $striker, $bowler){
+
+
+        $query3="select * from players where id='$striker'";
+        $result3=$this->db->select($query3);
+
+        $value = $result3->fetch_assoc();
+        $team_id = $value['team_id'];
+
+        $pre_runs = $this->getRunsByPlayerId($striker, "battingtable");
+
+        $totallruns = $pre_runs + $runs;
+
+        if ($runs == 4) {
+            $query = "select * from battingtable where player_id = $striker";
+            $result = $this->db->select($query);
+            $value = $result->fetch_assoc();
+            $fours = $value['fours'];
+            $fours= $fours + 1;
+
+            $query = "update battingtable set fours='$fours' where player_id = '$striker'";
+            $result = $this->db->update($query);
+
+            $query4 = "update score_board set fours='$fours' where team_id = '$team_id'";
+            $result4 = $this->db->update($query4);
+        }
+        if ($runs == 6) {
+            $query = "select * from battingtable where player_id = $striker";
+            $result = $this->db->select($query);
+            $value = $result->fetch_assoc();
+            $sixes = $value['sixes'];
+            $sixes= $sixes + 1;
+
+            $query = "update battingtable set sixes='$sixes' where player_id = '$striker'";
+            $result = $this->db->update($query);
+
+            $query4 = "update score_board set sixes='$sixes' where team_id = '$team_id'";
+            $result4 = $this->db->update($query4);
+
+        }
+
+
+        $query = "update battingtable set runs=$totallruns where player_id = '$striker'";
+        $result = $this->db->update($query);
+
+
+        $pre_runs = $this->getRunsByPlayerId($bowler, 'bowlingtable');
+
+        $runs = $pre_runs + $runs;
+
+
+        $query2 = "update bowlingtable set runs=$runs where player_id = '$bowler'";
+        $result2 = $this->db->update($query2);
+
+        $query4 = "update score_board set runs=$runs where team_id = '$team_id'";
+        $result4 = $this->db->update($query4);
+
+
+        $this->updateBalls($striker, $bowler, $team_id);
+
+    }
+    public function updateBalls($striker, $bowler, $team_id){
+        $query = "select * from battingtable where player_id = $striker";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $ball_faced = $value['ball_faced'];
+        $runs = $value['runs'];
+        $ball_faced= $ball_faced + 1;
+
+        $strike_rate = ($runs/$ball_faced)*100;
+
+        
+
+        $query = "update battingtable set ball_faced='$ball_faced',strike_rate='$strike_rate'  where player_id = '$striker'";
+        $result = $this->db->update($query);
+
+
+        $query = "select * from score_board where team_id = $team_id";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $balls = $value['balls'];
+        $runs = $value['runs'];
+        $balls= $balls + 1;
+        $overs = $balls/6;
+
+        $run_rate = $runs/$overs;
+
+        $query4 = "update score_board set balls='$balls', overs='$overs',run_rate='$run_rate' where team_id = '$team_id'";
+        $result4 = $this->db->update($query4);
+
+
+        $query = "select * from bowlingtable where player_id = $bowler";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $balls_bowled = $value['balls_bowled'];
+        $runs = $value['runs'];
+        $balls_bowled= $balls_bowled + 1;
+
+        $overs=$balls_bowled/6;
+        $economy_rate = $runs/$overs;
+
+        $query4 = "update bowlingtable set balls_bowled='$balls_bowled',economy_rate='$economy_rate' where player_id = '$bowler'";
+        $result4 = $this->db->update($query4);
+
+    }
+    public function updateExtras($extra,$player_id){
+        $query3="select * from players where id='$player_id'";
+        $result3=$this->db->select($query3);
+
+        $value = $result3->fetch_assoc();
+        $team_id = $value['team_id'];
+
+        $query = "select * from score_board where team_id = $team_id";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $pre_extras = $value['extras'];
+        $pre_runs = $value['runs'];
+
+        $runs = $pre_runs + $extra;
+        $totallExtras = $pre_extras + $extra;
+
+        $query4 = "update score_board set extras='$totallExtras', runs='$runs' where team_id = '$team_id'";
+        $result4 = $this->db->update($query4);
+
+    }
 }
 
