@@ -12,9 +12,37 @@ class Team
 		$this->fm=new Format();
 	}
 
+    public function any_match()
+    {
+        $query = "SELECT COUNT(*) as total FROM matches WHERE status= 'continue'";
+        $result = $this->db->select($query);
+        $res = $result->fetch_assoc();
+        if ($res['total'] > 0){
+            return true;
+        }
+        return false;
+
+	}
+
+    public function updateStatus($status)
+    {
+        $match = "SELECT * FROM matches limit 1";
+        $res = $this->db->select($match);
+        $res = $res->fetch_assoc();
+        $id = $res['id'];
+
+     $query = "UPDATE matches SET status=$status WHERE id = $id";
+     $result = $this->db->update($query);
+     if ($result){
+         echo "Status updated to".$status;
+     }
+     else{
+         echo "Some Errors occured";
+     }
+	}
 	public function createMatch($team,$decision,$stadium,$over)
 	{
-		$query = "INSERT INTO matches(team,toss,decision,stadium,over) VALUES('$team','1','$decision','$stadium','$over')";
+		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','continue')";
 		$result = $this->db->insert($query);
 
 
@@ -28,7 +56,7 @@ class Team
 			$decision=0;
 		else $decision=1;
 
-		$query1 = "INSERT INTO matches(team,decision,stadium,over) VALUES('$team','$decision','$stadium','$over')";
+		$query1 = "INSERT INTO matches(team,decision,stadium,over,status) VALUES('$team','$decision','$stadium','$over','continue')";
 		$result1 = $this->db->insert($query1);
 
         $query3 = "INSERT INTO score_board(team_id) VALUES('$team')";
@@ -44,7 +72,13 @@ class Team
 
 	}
 
-
+    public function count_teams()
+    {
+        $query ="SELECT count(*) as total FROM team";
+        $result = $this->db->select($query);
+        $result = $result->fetch_assoc();
+        return $result['total'];
+    }
 	public function addTeam($teamName,$location)
     {
         $query = "INSERT INTO team(teamName,location) VALUES('$teamName','$location')";
@@ -53,20 +87,20 @@ class Team
     }
     public function updateTeam($teamName,$location, $id)
     {
-            $query = "update team set teamName='$teamName',location='$location' where id='$id'";
-            $result = $this->db->update($query);
-            if ($result) {
-                $msg = "Team Updated";
-                return $msg;
-            } else {
-                $msg = "Team Not Updated";
-                return $msg;
-            }
+        $query = "update team set teamName='$teamName',location='$location' where id='$id'";
+        $result = $this->db->update($query);
+        if ($result) {
+            $msg = "Team Updated";
+            return $msg;
+        } else {
+            $msg = "Team Not Updated";
+            return $msg;
+        }
 
 
     }
 
-      public function getAllTeam()
+    public function getAllTeam()
     {
         $query="select * from team";
         $result=$this->db->select($query);

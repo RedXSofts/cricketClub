@@ -51,15 +51,17 @@
 		$decision=$_POST['decision'];
 		$stadium=$_POST['stadium'];
 		$over=$_POST['over'];
-        $check = $tm->createMatch($team,$decision,$stadium,$over);
+        $check = $tm->createMatch($team,$decision,$stadium,$over,'1');
     }
 
     ?>
-
+<?php if($tm->any_match()): ?>
+    <?php echo '<script>alert("Match is in progress can\'t adda another")</script>' ?>
+    <?php endif;  ?>
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Add Team</h1>
+                <h1 class="page-header">Add Match</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -68,7 +70,7 @@
             <div class="col-lg-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <b>Add Team</b>
+                        <b>Add Match</b>
                     </div>
                     <div class="panel-body">
                         <form role="form" class="col-lg-12" method="post" action="addMatch.php">
@@ -119,8 +121,14 @@
 							</div>
 
                             <div class="col-lg-12 text-center">
-                            <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Team</button>
+                                <?php if($tm->any_match()): ?>
+                                    <button disabled="true" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Match in progress</button>
+
+                                    <?php else: ?>
+                            <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Match
+                            </button>
                             <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
+                           <?php endif; ?>
                             </div>
                         </form>
 

@@ -44,15 +44,15 @@
 
     <?php
     include_once 'classes/Team.php';
-    include_once 'classes/session.php';
     $tm=new Team();
-    if (isset($_POST['addteam']))
+    if (isset($_POST['statusbtn']))
     {
-        //$tm=new Team();
-        $team_name=$_POST['team_name'];
-        $location=$_POST['location'];
-        $check = $tm->addTeam($team_name,$location);
-
+       // echo '<script>alert("$_POST['status']")</script>';
+        /*$status=$_POST['status'];
+        echo $status;*/
+        print_r($_POST['status']);
+        die;
+        $check = $tm->updateStatus($status);
     }
 
     ?>
@@ -60,51 +60,44 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Add Team</h1>
+                <h1 class="page-header">Put Match On Break</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-----New Row---->
         <div class="row">
             <div class="col-lg-6">
-                <?php if($tm->count_teams() >= 2 ): ?>
-                   <?php  echo '<script type="text/javascript">alert("You already have added two teams");</script>'; ?>
-                <?php endif; ?>
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <b>Add Team</b>
+                        <b>Put Match On Break</b>
                     </div>
                     <div class="panel-body">
-                        <form role="form" class="col-lg-12" method="post" action="addTeam.php">
-                                 <div class="row">
-                                     <div style="color:red; text-align: center; font-size:16px;"><?php
-                                         if (isset($_POST['addteam'])) {
-                                             echo "$check";
-                                         }
-                                         ?>
-                                  </div>
-                                 </div>
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Team Name:</label>
-                                <input class="form-control"  required type="text" name="team_name"  placeholder="Enter Name" />
-                            </div>
-                            
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Location:</label>
-                                    <input class="form-control" required type="text"  name="location" placeholder="Enter Location" />
+                        <form role="form" class="col-lg-12" method="post" action="matchBreak.php">
+                            <div class="row">
+                                <div style="color:red; text-align: center; font-size:16px;"><?php
+                                    if (isset($_POST['status'])) {
+                                        echo "$check";
+                                    }
+                                    ?>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Choose Status</label>
+                                            <select name="status" class="form-control">
+                                                <option>choose status</option>
+                                                <option>Continue</option>
+                                                <option>Break</option>
+                                                <option>Cancel</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-center">
-                                <?php if ($tm->count_teams() >= 2): ?>
-                            <button  class="btn btn-primary" disabled="true"><i class="fa fa-sign-out fa-fw"></i> Can't add Team</button>
-                                <?php else: ?>
-                                    <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Team</button>
-                                    <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
-                                <?php endif; ?>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="submit" name="statusbtn" class="btn btn-primary">Update</button>
+                                </div>
                             </div>
+
                         </form>
 
                     </div>
@@ -112,6 +105,7 @@
                 </div>
                 <!-- /.panel -->
             </div>
+
         </div>
         <!-- /.row -->
     </div>

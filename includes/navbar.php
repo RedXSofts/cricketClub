@@ -87,6 +87,9 @@ Session::checkSession();
                             <a href="addMatch.php">Add Match</a>
                         </li>
                         <li>
+                            <a href="matchBreak.php">Match Break</a>
+                        </li>
+                        <li>
                             <a href="matchList.php">Manage Matches</a>
                         </li>
                         <li>

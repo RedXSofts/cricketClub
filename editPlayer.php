@@ -46,8 +46,8 @@
     include_once 'classes/Team.php';
       $id=$_GET['editteam'];
        $tm=new Team();
-       $teamdate=$tm->getAllTeamById($id);
-           $team=$teamdate->fetch_assoc();
+       $team_data=$tm->getAllTeamById($id);
+           $team=$team_data->fetch_assoc();
     if (isset($_POST['addTeam']))
     {
       
