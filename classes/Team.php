@@ -534,6 +534,15 @@ class Team
 
 
     }
+
+    public function updateMatchSataus(){
+
+        $query1 = "UPDATE matches SET status = 'Finish'";
+        $result1 = $this->db->update($query1);
+
+    }
+
+
     public function finishMatch(){
         
         $query = "DELETE FROM matches";

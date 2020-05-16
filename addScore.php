@@ -86,6 +86,11 @@
     }
     if (isset($_POST['finish'])) {
 
+        $tm->updateMatchSataus();
+
+    }
+    if (isset($_POST['delete'])) {
+
         $tm->finishMatch();
 
     }
@@ -336,7 +341,8 @@
             <div class="col-lg-12 text-center">
                             <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Data</button>
                             <button type="submit" onclick="return confirm('Are You Sure To Change Team')" name="change" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Change Team</button>
-                            <button type="submit" name="finish" onclick="return confirm('Are you sure to finish Match! All Data will be Deleted')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>
+                            <button type="submit" name="finish" onclick="return confirm('Are you sure to finish Match!')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>
+                            <button type="submit" name="delete" onclick="return confirm('Are you sure to Delete Match! All Data will be Deleted')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Delete Match</button>
                         </form>
 
         </div>
