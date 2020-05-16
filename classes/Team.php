@@ -42,7 +42,20 @@ class Team
 	}
 	public function createMatch($team,$decision,$stadium,$over)
 	{
-		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','continue')";
+	   // $status = 'continue';
+	    
+	   // $data = [
+    //         'team' => $team,
+    //         'decision' => $decision,
+    //         'stadium' => $stadium,
+    //     ];
+    //     $sql = "INSERT INTO users (name, surname, sex) VALUES (:name, :surname, :sex)";
+    //     $stmt= $pdo->prepare($sql);
+    //     $stmt->execute($data);
+	    
+// 		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','$status')";
+		
+		$query = "INSERT INTO matches(`team`,`toss`,`over`,`decision`,`stadium`,`status`) VALUES($team,'1',$over,'$decision','$stadium','continue')";
 		$result = $this->db->insert($query);
 
 
@@ -56,7 +69,9 @@ class Team
 			$decision=0;
 		else $decision=1;
 
-		$query1 = "INSERT INTO matches(team,decision,stadium,over,status) VALUES('$team','$decision','$stadium','$over','continue')";
+// 		$query1 = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','0,'$decision','$stadium','$over','$status')";
+
+$query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`) VALUES('$team','$over','$decision','$stadium','continue')";
 		$result1 = $this->db->insert($query1);
 
         $query3 = "INSERT INTO score_board(team_id) VALUES('$team')";
@@ -83,6 +98,13 @@ class Team
     {
         $query = "INSERT INTO team(teamName,location) VALUES('$teamName','$location')";
         $result = $this->db->insert($query);
+        if ($result) {
+            $msg = "Team Added Successfully";
+            return $msg;
+        } else {
+            $msg = "Team Not Added Successfully";
+            return $msg;
+        }
 
     }
     public function updateTeam($teamName,$location, $id)
@@ -241,11 +263,16 @@ class Team
         return $result;
     }
 
-    public function addCteam($team_one,$team_two,$location)
+    public function updateCteam($team_one,$team_two,$location)
     {
-        $query = "INSERT INTO cteam(teamAName,teamBName,stadium) VALUES('$team_one','$team_two','$location')";
-        $result = $this->db->insert($query);
+        $query = "update cteam set teamAName='$team_one',teamBName='$team_two',stadium='$location'";
+            $result = $this->db->update($query);
 
+    }
+    public function getAllCTeam(){
+        $query="select * from cteam";
+        $result=$this->db->select($query);
+        return $result;
     }
 
     public function updateStriker($player_id){
@@ -467,6 +494,73 @@ class Team
         $query4 = "update battingtable set status='0',striker_status='0'";
         $result4 = $this->db->update($query4);
 
+        // echo '<script>window.location.replace("addOpener.php")</script>';
+    }
+
+    public function getAllValue(){
+        $query = "select * from bettable";
+        $result = $this->db->select($query);
+        return $result;
+    }
+    public function updateValue($teamAv1,$teamAv2,$sessionOverV1,$sessionOverV2,$xBollV1,$xBollV2){
+        $query = "update bettable set teamAv1='$teamAv1',teamAv2='$teamAv2',sessionOverV1='$sessionOverV1',sessionOverV2='$sessionOverV2',xBollV1='$xBollV1',xBollV2='$xBollV2'";
+        $result = $this->db->update($query);
+
+    }
+
+    public function updateLastBAll($value){
+
+        $query = "select * from sixballs";
+        $result = $this->db->select($query);
+        $result1=$result->fetch_assoc();
+        $arr = array();
+
+        $arr[0] =$result1['b1'];
+        $arr[1] =$result1['b2'];
+        $arr[2] =$result1['b3'];
+        $arr[3] =$result1['b4'];
+        $arr[4] =$result1['b5'];
+        $arr[5] =$result1['b6'];
+
+        $query1 = "UPDATE sixballs SET b1='$arr[1]',b2='$arr[2]',b3='$arr[3]',b4='$arr[4]',b5='$arr[5]',b6='$value'";
+        $result1 = $this->db->update($query1);
+    }
+    public function resetBall(){
+        
+        $query1 = "UPDATE sixballs SET b1='0',b2='0',b3='0',b4='0',b5='0',b6='0'";
+        $result1 = $this->db->update($query1);
+
+
+    }
+    public function finishMatch(){
+        
+        $query = "DELETE FROM matches";
+        $result = $this->db->update($query);
+
+        $query2 = "DELETE FROM team";
+        $result2 = $this->db->update($query2);
+
+        $query3 = "DELETE FROM battingtable";
+        $result3 = $this->db->update($query3);
+
+        $query4 = "DELETE FROM bowlingtable";
+        $result4 = $this->db->update($query4);
+
+        $query5 = "DELETE FROM players";
+        $result5 = $this->db->update($query5);
+
+        $query6 = "DELETE FROM score_board";
+        $result6 = $this->db->update($query6);
+
+        $query7 = "DELETE FROM players";
+        $result7 = $this->db->update($query7);
+
+        $query8 = "UPDATE sixballs SET b1='0',b2='0',b3='0',b4='0',b5='0',b6='0'";
+        $result8 = $this->db->update($query8);
+
+        $query9 = "UPDATE bettable SET teamAv1='0',teamAv2='0',sessionOverV1='0',sessionOverV2='0',xBollV1='0',xBollV2='0'";
+        $result9 = $this->db->update($query9);
+
+        echo '<script>window.location.replace("addTeam.php")</script>';
     }
 }
-

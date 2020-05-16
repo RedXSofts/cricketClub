@@ -11,7 +11,24 @@ class Player
 		$this->db=new Database();
 		$this->fm=new Format();
 	}
-
+    public function getPlayerData($id){
+        $query = "SELECT * FROM players WHERE id=$id";
+        $res = $this->db->select($query);
+        $res = $res->fetch_assoc();
+        return $res['player_name'];
+    }
+    public function update_player($n,$id){
+        
+        $query = "UPDATE players SET player_name = '$n' WHERE id=$id";
+    
+        $res = $this->db->update($query);
+        if($res){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     public function count_teamA_players()
     {
         $team_q1 = "SELECT * FROM team limit 1";

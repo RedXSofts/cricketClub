@@ -85,7 +85,86 @@
        $result=$db->select($query);
        return $result;
     }
+    function activegetBowling()
+    {
+       $db=new Database();
+       $query="select * from bowlingtable where status='1'";
+       $result=$db->select($query);
+       return $result;
+    }
+    function getTeamScoreBoard($id)
+    {
+       $db=new Database();
+       $query="select * from score_board where team_id='$id'";
+       $result=$db->select($query);
+       return $result;
+    }
 
+
+    function getGetBattingRecord()
+    {
+       $db=new Database();
+       $query="select * from battingtable";
+       $result=$db->select($query);
+       return $result;
+    }
+    function getGetBowlingRecord()
+    {
+       $db=new Database();
+       $query="select * from bowlingtable";
+       $result=$db->select($query);
+       return $result;
+    }
+    function getPlayer($id)
+    {
+       $db=new Database();
+       $query="select * from players where id='$id'";
+       $result=$db->select($query);
+       return $result;
+    }
+
+
+    function getTossWinnerTeamId()
+    {
+       $db=new Database();
+       $query="select * from matches where toss='1'";
+       $result=$db->select($query);
+       $results=$result->fetch_assoc();
+       return $results['team'];
+    }
+
+    function getTossWinerScoreWiner($id)
+    {
+       $db=new Database();
+       $query="select * from score_board where team_id='$id'";
+       $result=$db->select($query);
+       return $result;
+    }
+    function getMatchStatus()
+    {
+       $db=new Database();
+       $query="select * from matches";
+       $result=$db->select($query);
+       $results=$result->fetch_assoc();
+       return $results['status'];
+    }
+
+    function lastSixBalls()
+    {
+       $db=new Database();
+       $query="select * from sixballs";
+       $result=$db->select($query);
+       return $result;
+    }
+
+    function sixvalue()
+    {
+       $db=new Database();
+       $query="select * from bettable";
+       $result=$db->select($query);
+       return $result;
+    }
+    
 
 
 ?>

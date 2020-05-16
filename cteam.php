@@ -45,13 +45,17 @@
     <?php
     include_once 'classes/Team.php';
     $tm=new Team();
+
+    $teamdate=$tm->getAllCTeam();
+    $team=$teamdate->fetch_assoc();
+
     if (isset($_POST['addteam']))
     {
 
         $team_name1=$_POST['team_one'];
         $team_name2=$_POST['team_two'];
         $location=$_POST['location'];
-        $check = $tm->addCteam($team_name1,$team_name2,$location);
+        $check = $tm->updateCteam($team_name1,$team_name2,$location);
     }
 
     ?>
@@ -83,20 +87,20 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Team One:</label>
-                                    <input class="form-control"  required type="text" name="team_one"  placeholder="Enter Team one Name" />
+                                    <input class="form-control"  required type="text" name="team_one"  value="<?php echo $team['teamAName']; ?>" />
                                 </div>
 
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Team Two:</label>
-                                    <input class="form-control" required type="text"  name="team_two" placeholder="Enter Team two name" />
+                                    <input class="form-control" required type="text"  name="team_two" value="<?php echo $team['teamBName']; ?>" />
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Location:</label>
-                                    <input class="form-control" required type="text"  name="location" placeholder="Enter Location" />
+                                    <input class="form-control" required type="text"  name="location" value="<?php echo $team['stadium']; ?>" />
                                 </div>
                             </div>
                             <div class="col-lg-12 text-center">

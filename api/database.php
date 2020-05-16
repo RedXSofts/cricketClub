@@ -2,9 +2,9 @@
 
 Class Database{
  public $host   = "localhost";
- public $user   = "root";
- public $pass   = "";
- public $dbname = "cricket_app";
+ public $user   = "admin_one";
+ public $pass   = "gc8Y0(pKGuHM";
+ public $dbname = "admin_db";
  
  
  public $link;

@@ -2,9 +2,20 @@
 <html lang="en">
 <?php include_once 'classes/Player.php';
 $pl=new Player();
-if(isset($_GET['del']))
+
+
+if(isset($_GET['openModel']))
 {
-    $pl->delete($_GET['del']);
+$id = $_GET['update'];
+
+
+    
+//     $pl->getPlayerById($id);
+
+}
+if(isset($_GET['update']))
+{
+    
     echo '<script>window.location.replace("playerList.php")</script>';
 }
 ?>
@@ -98,8 +109,20 @@ if(isset($_GET['del']))
                                          echo $get['teamName'];
 
                                      ?></td>
-                                    <td><a class="btn btn-primary" href="editPlayer.php?editplayer=<?php echo $getAll['id']; ?>">Edit</a> <a class="btn btn-danger" onclick="return confirm('Are you sure to delete!')" href="playerList.php?del=<?php echo $getAll['id'];?>">Delete</a></td>
+                                    <td>
+                                        <!--<a class="btn btn-primary" data-toggle="modal" data-target="#editprofile" href="editPlayer.php?editplayer=<?php echo $getAll['id']; ?>">Edit</a>-->
+                                        
+                                        <a type="submit" name="openModel" class="btn btn-sm btn-primary" href="updatePlayer.php?update=<?php echo $getAll['id']; ?>">Edit</a>
+        <!--<button >Edit</button>-->
+                  </form>
+            </div>
+         </div>
+      </div>
+   </div>
+           
+                                    </td>
                                 </tr>
+
                                 <?php }} ?>
                                 </tbody>
                             </table>
@@ -116,6 +139,9 @@ if(isset($_GET['del']))
 
     </div>
     <!-- /#wrapper -->
+    
+    
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
@@ -135,6 +161,7 @@ if(isset($_GET['del']))
     <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="vendor/datatables-responsive/dataTables.responsive.js"></script>
+    
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
 

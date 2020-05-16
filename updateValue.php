@@ -44,94 +44,95 @@
 
     <?php
     include_once 'classes/Team.php';
-	$tm=new Team();
-    if (isset($_POST['addteam']))
+
+       $tm=new Team();
+       $valuedate=$tm->getAllValue();
+       if ($valuedate) {
+        $value=$valuedate->fetch_assoc();
+       }
+    if (isset($_POST['update']))
     {
-        $team=$_POST['team'];
-		$decision=$_POST['decision'];
-		$stadium=$_POST['stadium'];
-		$over=$_POST['over'];
-        $check = $tm->createMatch($team,$decision,$stadium,$over);
-        // $tm->resetBall();
+      
+        $teamAv1=$_POST['teamAv1'];
+        $teamAv2=$_POST['teamAv2'];
+        $sessionOverV1=$_POST['sessionOverV1'];
+        $sessionOverV2=$_POST['sessionOverV2'];
+        $xBollV1=$_POST['xBollV1'];
+        $xBollV2=$_POST['xBollV2'];
+        $check = $tm->updateValue($teamAv1,$teamAv2,$sessionOverV1,$sessionOverV2,$xBollV1,$xBollV2);
     }
 
     ?>
-<?php if($tm->any_match()): ?>
-    <?php echo '<script>alert("Match Has been Added!!! Redirecting you to Add Opener Page!")</script>';
-    echo '<script>window.location.replace("addOpener.php")</script>';
-    ?>
-    <?php endif;  ?>
+
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Add Match</h1>
+                <h1 class="page-header">Update Client</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-----New Row---->
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <b>Add Match</b>
+                        <b>Update Client</b>
                     </div>
                     <div class="panel-body">
-                        <form role="form" class="col-lg-12" method="post" action="addMatch.php">
+                        <form role="form" class="col-lg-7" method="post" action="">
                                  <div class="row">
                                      <div style="color:red; text-align: center; font-size:16px;"><?php
-                                         if (isset($_POST['addteam'])) {
+                                         if (isset($_POST['addTeam'])) {
                                              echo "$check";
                                          }
                                          ?>
                                   </div>
                                  </div>
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Select Toss Winning Team:</label>
-								<select class="form-control" name="team" required>
-									<option value="">Choose Team</option>
-									<?php
-									$get=$tm->getAllTeam();
-									if($get)
-									{
-										while ($value=$get->fetch_assoc())
-										{  ?>
-											<option value="<?php echo $value['id']; ?>"><?php echo $value['teamName']; ?></option>
-										<?php }} ?>
-								</select>
-                            </div>
 
-								<div class="form-group">
-									<label>Overs:</label>
-									<input class="form-control" name="over" placeholder="Enter Overs" required>
-								</div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Team A Value 1:</label>
+                                    <input class="form-control" value="<?php echo $value['teamAv1'];?>"  required type="text" name="teamAv1"  placeholder="Enter Name" />
+                                </div>
                             
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label>Choose Decision:</label>
-                                   <select class="form-control" name="decision" required>
-									   <option value="">Choose Decision</option>
-									   <option value="1">Bating</option>
-									   <option value="0">Bowling</option>
-								   </select>
+                                    <label>Team A Value 2:</label>
+                                    <input class="form-control" value="<?php echo $value['teamAv2']; ?>" required type="text"  name="teamAv2" placeholder="Enter Location" />
                                 </div>
-								<div class="form-group">
-									<label>Stadium:</label>
-									<input class="form-control" name="stadium" placeholder="Enter Stadium" required>
-								</div>
-
-							</div>
-
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Session Over V1:</label>
+                                    <input class="form-control" value="<?php echo $value['sessionOverV1']; ?>"  required type="text" name="sessionOverV1"  placeholder="Enter Name" />
+                                </div>
+                            
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Session Over V2:</label>
+                                    <input class="form-control" value="<?php echo $value['sessionOverV1']; ?>" required type="text"  name="sessionOverV2" placeholder="Enter Location" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>
+                                    Add Team Name:</label>
+                                    <input class="form-control" value="<?php echo $value['xBollV2']; ?>"  required type="text" name="xBollV1"  placeholder="Enter Name" />
+                                </div>
+                            
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Add Session Over:</label>
+                                    <input class="form-control" value="<?php echo $value['xBollV1']; ?>" required type="text"  name="xBollV2" placeholder="Enter Location" />
+                                </div>
+                            </div>
+                            
                             <div class="col-lg-12 text-center">
-                                <?php if($tm->any_match()): ?>
-                                    <button disabled="true" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Match in progress</button>
-
-                                    <?php else: ?>
-                            <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Match
-                            </button>
+                            <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Update Value</button>
                             <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
-                           <?php endif; ?>
                             </div>
                         </form>
 

@@ -43,69 +43,58 @@
     <?php include_once 'includes/navbar.php'?>
 
     <?php
-    include_once 'classes/Team.php';
-    include_once 'classes/session.php';
-    $tm=new Team();
-    if (isset($_POST['addteam']))
+    include_once 'classes/Player.php';
+    $pl=new Player();
+        $id=$_GET['update'];
+    $plyrdata=$pl->getPlayerData($id);
+    /*if (isset($_POST['updatePlayerBtn']))
     {
-        //$tm=new Team();
-        $team_name=$_POST['team_name'];
-        $location=$_POST['location'];
-        $check = $tm->addTeam($team_name,$location);
-
-    }
+        $plyr_name=$_POST['player-name'];
+        if($pl->update_player($plyr_name, $id)){
+            header("location:playerList.php");
+        }
+    }*/
 
     ?>
 
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Add Team</h1>
+                <h1 class="page-header">Update Player</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <!-----New Row---->
         <div class="row">
-            <div class="col-lg-6">
-                <?php if($tm->count_teams() >= 2 ): ?>
-                   <?php  echo '<script type="text/javascript">alert("Both Teams Added Susseccfully");</script>'; 
-                   echo '<script>window.location.replace("teamList.php")</script>';
-                   ?>
-                <?php endif; ?>
+            <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <b>Add Team</b>
+                        <b>Update Player</b>
                     </div>
                     <div class="panel-body">
-                        <form role="form" class="col-lg-12" method="post" action="addTeam.php">
-                                 <div class="row">
-                                     <div style="color:red; text-align: center; font-size:16px;"><?php
-                                         if (isset($_POST['addteam'])) {
-                                             echo "$check";
-                                         }
-                                         ?>
-                                  </div>
-                                 </div>
-                            <div class="col-lg-6">
-                            <div class="form-group">
-                                <label>Team Name:</label>
-                                <input class="form-control"  required type="text" name="team_name"  placeholder="Enter Name" />
-                            </div>
-                            
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Location:</label>
-                                    <input class="form-control" required type="text"  name="location" placeholder="Enter Location" />
+                        <form role="form" class="col-lg-7" method="post" action="updateP.php">
+                            <div class="row">
+                                <div style="color:red; text-align: center; font-size:16px;"><?php
+                                    if (isset($_POST['updatePlayerBtn'])) {
+                                        //echo "$check";
+                                    }
+                                    ?>
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-center">
-                                <?php if ($tm->count_teams() >= 2): ?>
-                            <button  class="btn btn-primary" disabled="true"><i class="fa fa-sign-out fa-fw"></i> Can't add Team</button>
-                                <?php else: ?>
-                                    <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Team</button>
-                                    <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
-                                <?php endif; ?>
+                            <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Player Name:</label>
+                                    <input class="form-control" value="<?php echo $plyrdata; ?>"  required type="text" name="player-name"  placeholder="Enter Name" />
+                                    <input type="hidden" name="id" value="<?= $id ?>" />
+                                </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                            <div class="col-lg-12 text-center pull-left">
+                                <button type="submit" name="updatePlayerBtn" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Update Player</button>
+                            </div>
                             </div>
                         </form>
 
@@ -114,6 +103,7 @@
                 </div>
                 <!-- /.panel -->
             </div>
+
         </div>
         <!-- /.row -->
     </div>

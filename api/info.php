@@ -11,8 +11,27 @@ $bWinnerName=getBowlingTeam();
 $msg['winnerTeam']=$tossWinnerName;
 $msg['bowlerTeam']=$bWinnerName;
 
+
+
  $tossWinnerId=getBatingTeamId();
  $batWinnerId=getBowlingTeamId();
+$winnerTeam=getTeamScoreBoard($tossWinnerId);
+$bowlerTeam=getTeamScoreBoard($batWinnerId);
+
+$winnerTeamScoreDetail=$winnerTeam->fetch_assoc();
+$BowlerTeamScoreDetail=$bowlerTeam->fetch_assoc();
+
+$msg['teambatOver']=$winnerTeamScoreDetail['overs'];
+$msg['teambatOuts']=$winnerTeamScoreDetail['no_of_outs'];
+$msg['teambatruns']=$winnerTeamScoreDetail['runs'];
+$msg['teambatId']=$tossWinnerId;
+
+$msg['teambollOver']=$BowlerTeamScoreDetail['overs'];
+$msg['teambollOuts']=$BowlerTeamScoreDetail['no_of_outs'];
+$msg['teambollruns']=$BowlerTeamScoreDetail['runs'];
+$msg['teambollId']=$batWinnerId;
+
+
 
 $teamA=getPlayerId($tossWinnerId);
 $teamB=getPlayerId($batWinnerId);

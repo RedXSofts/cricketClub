@@ -45,6 +45,7 @@
     <?php
     include_once 'classes/Team.php';
 	$tm=new Team();
+
     if (isset($_POST['update']))
     {
         $striker=$_POST['striker'];
@@ -58,12 +59,13 @@
         $newBowler=$_POST['newBowler'];
         if ($newStriker) {
         $tm->updateStriker($newStriker);
-            # code...
         }
         if ($runs) {
             if ($runType) {
+                $tm->updateLastBAll($runType);
                 $tm->updateExtras($runs,$striker);
             }else{
+                $tm->updateLastBAll($runs);
                 $tm->updateRun($runs, $striker, $bowler);
             }
         }
@@ -71,15 +73,21 @@
             $tm->updateBowler($bowler, $newBowler);
         }
         if ($newPlayer) {
-
+            $tm->updateLastBAll("O");
             $tm->outPlayer($outPlayer, $newPlayer);
         }
     }
-    if (isset($_POST['finish'])) {
+    if (isset($_POST['change'])) {
 
         $striker=$_POST['striker'];
-
+        $tm->resetBall();
         $tm->changeTeam($striker);
+        
+    }
+    if (isset($_POST['finish'])) {
+
+        $tm->finishMatch();
+
     }
 
     ?>
@@ -327,7 +335,8 @@
             </div>
             <div class="col-lg-12 text-center">
                             <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Data</button>
-                            <button type="submit" name="finish" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>
+                            <button type="submit" onclick="return confirm('Are You Sure To Change Team')" name="change" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Change Team</button>
+                            <button type="submit" name="finish" onclick="return confirm('Are you sure to finish Match! All Data will be Deleted')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>
                         </form>
 
         </div>

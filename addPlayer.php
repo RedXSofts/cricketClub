@@ -54,21 +54,18 @@
     ?>
 
     <div id="page-wrapper">
-        <?php if (($pl->count_teamA_players() >= 12) and ($pl->count_teamB_players() >= 12)): ?>
+       
 
             <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Add Player</h1>
-
-                    <?php echo '<script>alert("Players have already been added.So no more players can be added")</script>' ?>
-                        <h4>Since players already added.So you can't add more players for now</h4>
+                       
 
             </div>
             <!-- /.col-lg-12 -->
 
         </div>
         <!-----New Row---->
-        <?php else: ?>
         <div class="row">
             <div class="col-lg-6">
                 <div class="panel panel-primary">
@@ -173,7 +170,6 @@
             </div>
 
         </div>
-        <?php endif; ?>
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->

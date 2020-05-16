@@ -1,7 +1,4 @@
-<?php
-include_once "classes/session.php";
-Session::checkSession();
-?>
+
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -90,7 +87,7 @@ Session::checkSession();
                             <a href="matchBreak.php">Match Break</a>
                         </li>
                         <li>
-                            <a href="matchList.php">Manage Matches</a>
+                            <a href="updateValue.php">Update Values</a>
                         </li>
                         <li>
                             <a href="addOpener.php">Add Openers</a>
@@ -102,9 +99,6 @@ Session::checkSession();
                     <ul class="nav nav-second-level">
                         <li>
                             <a href="addScore.php">Add score</a>
-                        </li>
-                        <li>
-                            <a href="scoreList.php">Manage Score</a>
                         </li>
                     </ul>
                 </li>
