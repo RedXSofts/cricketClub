@@ -385,13 +385,22 @@ class Team
 
         $pre_runs = $this->getRunsByPlayerId($bowler, 'bowlingtable');
 
-        $runs = $pre_runs + $runs;
+        $runs1 = $pre_runs + $runs;
 
 
-        $query2 = "update bowlingtable set runs=$runs where player_id = '$bowler'";
+        $query2 = "update bowlingtable set runs=$runs1 where player_id = '$bowler'";
         $result2 = $this->db->update($query2);
 
-        $query4 = "update score_board set runs=$runs where team_id = '$team_id'";
+
+        $query = "select * from score_board where team_id = $team_id";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $pre_runs = $value['runs'];
+
+        $runs2 = $pre_runs + $runs;
+
+
+        $query4 = "update score_board set runs=$runs2 where team_id = '$team_id'";
         $result4 = $this->db->update($query4);
 
 
@@ -419,8 +428,19 @@ class Team
         $value = $result->fetch_assoc();
         $balls = $value['balls'];
         $runs = $value['runs'];
+        $overs = $value['overs'];
         $balls= $balls + 1;
-        $overs = $balls/6;
+        $overs1= (int)$overs;
+        $overs = floor($overs1);
+        
+        $pre_overs_balls = $overs*6;
+        $rem_balls = $balls-$pre_overs_balls;
+        if($rem_balls<6)
+        {
+        $overs = $overs.'.'.$rem_balls;
+        }else{
+            $overs = $overs+1;
+        }
 
         $run_rate = $runs/$overs;
 
@@ -434,11 +454,25 @@ class Team
         $balls_bowled = $value['balls_bowled'];
         $runs = $value['runs'];
         $balls_bowled= $balls_bowled + 1;
-
-        $overs=$balls_bowled/6;
+        $overs = $value['overs'];
+        
+        
+        $overs1= (int)$overs;
+        $overs = floor($overs1);
+        
+        $pre_overs_balls = $overs*6;
+        $rem_balls = $balls-$pre_overs_balls;
+        if($rem_balls<6)
+        {
+        $overs = $overs.'.'.$rem_balls;
+        }else{
+            $overs = $overs+1;
+        }
+        
+        
         $economy_rate = $runs/$overs;
 
-        $query4 = "update bowlingtable set balls_bowled='$balls_bowled',economy_rate='$economy_rate' where player_id = '$bowler'";
+        $query4 = "update bowlingtable set overs='$overs', balls_bowled='$balls_bowled',economy_rate='$economy_rate' where player_id = '$bowler'";
         $result4 = $this->db->update($query4);
 
     }
