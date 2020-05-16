@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="addTeam.php">
+                        <a href="teamList.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -93,7 +93,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="addPlayer.php">
+                        <a href="playerList.php">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="addMatch.php">
+                        <a href="#">
                             <div class="panel-footer">
                                 <span class="pull-left">View Details</span>
                                 <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

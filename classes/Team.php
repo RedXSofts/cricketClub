@@ -480,6 +480,9 @@ class Team
         $query4 = "update score_board set target='$target' where team_id='$team_id'";
         $team = $this->db->update($query4);
 
+        $query4 = "update matches set decision=0 where team='$team_id'";
+        $result4 = $this->db->update($query4);
+
         // $remainingTeam = $this->getRemainingTeam($team_id);
         $get=$this->getRemainingTeam($team_id);
         $gets = $get->fetch_assoc();
@@ -534,25 +537,25 @@ class Team
     public function finishMatch(){
         
         $query = "DELETE FROM matches";
-        $result = $this->db->update($query);
+        $result = $this->db->delete($query);
 
         $query2 = "DELETE FROM team";
-        $result2 = $this->db->update($query2);
+        $result2 = $this->db->delete($query2);
 
         $query3 = "DELETE FROM battingtable";
-        $result3 = $this->db->update($query3);
+        $result3 = $this->db->delete($query3);
 
         $query4 = "DELETE FROM bowlingtable";
-        $result4 = $this->db->update($query4);
+        $result4 = $this->db->delete($query4);
 
         $query5 = "DELETE FROM players";
-        $result5 = $this->db->update($query5);
+        $result5 = $this->db->delete($query5);
 
         $query6 = "DELETE FROM score_board";
-        $result6 = $this->db->update($query6);
+        $result6 = $this->db->delete($query6);
 
         $query7 = "DELETE FROM players";
-        $result7 = $this->db->update($query7);
+        $result7 = $this->db->delete($query7);
 
         $query8 = "UPDATE sixballs SET b1='0',b2='0',b3='0',b4='0',b5='0',b6='0'";
         $result8 = $this->db->update($query8);
