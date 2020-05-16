@@ -42,20 +42,8 @@ class Team
 	}
 	public function createMatch($team,$decision,$stadium,$over)
 	{
-	   // $status = 'continue';
-	    
-	   // $data = [
-    //         'team' => $team,
-    //         'decision' => $decision,
-    //         'stadium' => $stadium,
-    //     ];
-    //     $sql = "INSERT INTO users (name, surname, sex) VALUES (:name, :surname, :sex)";
-    //     $stmt= $pdo->prepare($sql);
-    //     $stmt->execute($data);
-	    
-// 		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','$status')";
-		
-		$query = "INSERT INTO matches(`team`,`toss`,`over`,`decision`,`stadium`,`status`) VALUES($team,'1',$over,'$decision','$stadium','continue')";
+        $status = 'continue';
+		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','$status')";
 		$result = $this->db->insert($query);
 
 
@@ -69,9 +57,7 @@ class Team
 			$decision=0;
 		else $decision=1;
 
-// 		$query1 = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','0,'$decision','$stadium','$over','$status')";
-
-$query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`) VALUES('$team','$over','$decision','$stadium','continue')";
+		$query1 = "INSERT INTO matches(team,decision,stadium,over,status) VALUES('$team','$decision','$stadium','$over','continue')";
 		$result1 = $this->db->insert($query1);
 
         $query3 = "INSERT INTO score_board(team_id) VALUES('$team')";
@@ -98,13 +84,6 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`) VALU
     {
         $query = "INSERT INTO team(teamName,location) VALUES('$teamName','$location')";
         $result = $this->db->insert($query);
-        if ($result) {
-            $msg = "Team Added Successfully";
-            return $msg;
-        } else {
-            $msg = "Team Not Added Successfully";
-            return $msg;
-        }
 
     }
     public function updateTeam($teamName,$location, $id)
@@ -316,6 +295,27 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`) VALU
            $query = "update battingtable set status = '0', striker_status = '0' where player_id='$outPlayer'";
             $result = $this->db->update($query);
 
+
+
+            $query3="select * from players where id='$outPlayer'";
+            $result3=$this->db->select($query3);
+
+            $value = $result3->fetch_assoc();
+            $team_id = $value['team_id'];
+
+
+            $query = "select * from score_board where team_id = $team_id";
+            $result = $this->db->select($query);
+            $value = $result->fetch_assoc();
+            $pre_out = $value['no_of_outs'];
+
+            $out= $pre_out + 1;
+
+            $query4 = "update score_board set no_of_outs='$out' where team_id = '$team_id'";
+            $result4 = $this->db->update($query4);
+
+
+
             $value = $result2->fetch_assoc();
             if ($value['striker_status'] == 1) {
                 $query2 = "INSERT INTO battingtable(player_id,status,striker_status) VALUES('$newPlayer','1','1')";
@@ -494,7 +494,6 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`) VALU
         $query4 = "update battingtable set status='0',striker_status='0'";
         $result4 = $this->db->update($query4);
 
-        // echo '<script>window.location.replace("addOpener.php")</script>';
     }
 
     public function getAllValue(){
