@@ -60,6 +60,7 @@
         $xBollV1=$_POST['xBollV1'];
         $xBollV2=$_POST['xBollV2'];
         $check = $tm->updateValue($teamAv1,$teamAv2,$sessionOverV1,$sessionOverV2,$xBollV1,$xBollV2);
+        echo '<script>window.location.replace("updateValue.php")</script>';
     }
 
     ?>
@@ -67,7 +68,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Update Client</h1>
+                <h1 class="page-header">Update Values</h1>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -76,7 +77,7 @@
             <div class="col-lg-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <b>Update Client</b>
+                        <b>Update Values</b>
                     </div>
                     <div class="panel-body">
                         <form role="form" class="col-lg-7" method="post" action="">
@@ -112,21 +113,21 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Session Over V2:</label>
-                                    <input class="form-control" value="<?php echo $value['sessionOverV1']; ?>" required type="text"  name="sessionOverV2" placeholder="Enter Location" />
+                                    <input class="form-control" value="<?php echo $value['sessionOverV2']; ?>" required type="text"  name="sessionOverV2" placeholder="Enter Location" />
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>
                                     Add Team Name:</label>
-                                    <input class="form-control" value="<?php echo $value['xBollV2']; ?>"  required type="text" name="xBollV1"  placeholder="Enter Name" />
+                                    <input class="form-control" value="<?php echo $value['xBollV1']; ?>"  required type="text" name="xBollV1"  placeholder="Enter Name" />
                                 </div>
                             
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Add Session Over:</label>
-                                    <input class="form-control" value="<?php echo $value['xBollV1']; ?>" required type="text"  name="xBollV2" placeholder="Enter Location" />
+                                    <input class="form-control" value="<?php echo $value['xBollV2']; ?>" required type="text"  name="xBollV2" placeholder="Enter Location" />
                                 </div>
                             </div>
                             

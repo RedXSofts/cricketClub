@@ -4,7 +4,7 @@ Class Database{
  public $host   = "localhost";
  public $user   = "root";
  public $pass   = "";
- public $dbname = "cricket_app";
+ public $dbname = "admin_db";
  
  
  public $link;

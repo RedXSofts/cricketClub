@@ -46,6 +46,11 @@
     include_once 'classes/Team.php';
 	$tm=new Team();
 
+    $check = $tm->check_openers();
+
+    if ($check) {
+    
+
     if (isset($_POST['update']))
     {
         $striker=$_POST['striker'];
@@ -60,22 +65,30 @@
         if ($newStriker) {
         $tm->updateStriker($newStriker);
         }
-        if ($runs) {
+        if ($runs or $runs == 0) {
             if ($runType) {
                 $tm->updateLastBAll($runType);
                 $tm->updateExtras($runs,$striker);
+                $tm->remaningBallsAndRuns();
+                
             }else{
                 $tm->updateLastBAll($runs);
                 $tm->updateRun($runs, $striker, $bowler);
+                $tm->remaningBallsAndRuns();
             }
+            echo '<script>window.location.replace("addScore.php")</script>';
         }
         if ($newBowler) {
             $tm->updateBowler($bowler, $newBowler);
+            echo '<script>window.location.replace("addScore.php")</script>';
         }
         if ($newPlayer) {
             $tm->updateLastBAll("O");
             $tm->outPlayer($outPlayer, $newPlayer);
+            $tm->remaningBallsAndRuns();
+            echo '<script>window.location.replace("addScore.php")</script>';
         }
+    $tm->save_history($bowler,$striker,$runs,$runType,$newPlayer,$outPlayer);
     }
     if (isset($_POST['change'])) {
 
@@ -89,11 +102,26 @@
         $tm->updateMatchSataus();
 
     }
+    if (isset($_POST['undo'])) {
+
+        $tm->undoLastBall();
+
+    }
+
     if (isset($_POST['delete'])) {
 
         $tm->finishMatch();
 
     }
+
+    // if (!$runType) {
+    //     $runType = "";
+    // }
+    // if (!$outPlayer) {
+    //     $outPlayer = 0;
+    // }
+
+
 
     ?>
 
@@ -340,6 +368,7 @@
             </div>
             <div class="col-lg-12 text-center">
                             <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Data</button>
+                            <button type="submit" onclick="return confirm('Are You Sure To Undo Last Ball')" name="undo" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Undo Last Ball</button>
                             <button type="submit" onclick="return confirm('Are You Sure To Change Team')" name="change" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Change Team</button>
                             <button type="submit" name="finish" onclick="return confirm('Are you sure to finish Match!')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>
                             <button type="submit" name="delete" onclick="return confirm('Are you sure to Delete Match! All Data will be Deleted')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Delete Match</button>
@@ -371,6 +400,9 @@
 <!-- Custom Theme JavaScript -->
 <script src="dist/js/sb-admin-2.js"></script>
 
+<?php }else{
+    echo '<script>window.location.replace("addOpener.php")</script>';
+} ?>
 </body>
 
 </html>

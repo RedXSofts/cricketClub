@@ -65,6 +65,7 @@ $batingTeamScoreDetail=$batingTeamDetail->fetch_assoc();
 $msg['beatingOver']=$batingTeamScoreDetail['overs'];
 $msg['beatingScoreOuts']=$batingTeamScoreDetail['runs']."-".$batingTeamScoreDetail['no_of_outs'];
 $msg['justRuns']=$batingTeamScoreDetail['runs'];
+$msg['justball']=$batingTeamScoreDetail['balls'];
 $msg['matchStatus']=getMatchStatus();
 
 $lastsixball=lastSixBalls();

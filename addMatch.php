@@ -51,7 +51,8 @@
 		$decision=$_POST['decision'];
 		$stadium=$_POST['stadium'];
 		$over=$_POST['over'];
-        $check = $tm->createMatch($team,$decision,$stadium,$over);
+        $time=$_POST['time'];
+        $check = $tm->createMatch($team,$decision,$stadium,$over,$time);
         // $tm->resetBall();
     }
 
@@ -122,6 +123,13 @@
 								</div>
 
 							</div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Match Start Time:</label>
+                                    <input class="form-control" name="time" type="time" required>
+                                </div>
+
+                            </div>
 
                             <div class="col-lg-12 text-center">
                                 <?php if($tm->any_match()): ?>

@@ -40,10 +40,22 @@ class Team
      //     echo "Some Errors occured";
      // }
 	}
-	public function createMatch($team,$decision,$stadium,$over)
+	public function createMatch($team,$decision,$stadium,$over,$time)
 	{
-        $status = 'continue';
-		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','$status')";
+	   // $status = 'continue';
+	    
+	   // $data = [
+    //         'team' => $team,
+    //         'decision' => $decision,
+    //         'stadium' => $stadium,
+    //     ];
+    //     $sql = "INSERT INTO users (name, surname, sex) VALUES (:name, :surname, :sex)";
+    //     $stmt= $pdo->prepare($sql);
+    //     $stmt->execute($data);
+	    
+// 		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','$status')";
+		
+		$query = "INSERT INTO matches(`team`,`toss`,`over`,`decision`,`stadium`,`status`,`start_time`) VALUES($team,'1',$over,'$decision','$stadium','continue','$time')";
 		$result = $this->db->insert($query);
 
 
@@ -57,7 +69,9 @@ class Team
 			$decision=0;
 		else $decision=1;
 
-		$query1 = "INSERT INTO matches(team,decision,stadium,over,status) VALUES('$team','$decision','$stadium','$over','continue')";
+// 		$query1 = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','0,'$decision','$stadium','$over','$status')";
+
+$query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`start_time`) VALUES('$team','$over','$decision','$stadium','continue','$time')";
 		$result1 = $this->db->insert($query1);
 
         $query3 = "INSERT INTO score_board(team_id) VALUES('$team')";
@@ -84,6 +98,13 @@ class Team
     {
         $query = "INSERT INTO team(teamName,location) VALUES('$teamName','$location')";
         $result = $this->db->insert($query);
+        if ($result) {
+            $msg = "Team Added Successfully";
+            return $msg;
+        } else {
+            $msg = "Team Not Added Successfully";
+            return $msg;
+        }
 
     }
     public function updateTeam($teamName,$location, $id)
@@ -294,9 +315,8 @@ class Team
         if ($result2!=false) {
            $query = "update battingtable set status = '0', striker_status = '0' where player_id='$outPlayer'";
             $result = $this->db->update($query);
-
-
-
+            
+            
             $query3="select * from players where id='$outPlayer'";
             $result3=$this->db->select($query3);
 
@@ -394,10 +414,15 @@ class Team
 
         $query = "select * from score_board where team_id = $team_id";
         $result = $this->db->select($query);
-        $value = $result->fetch_assoc();
+        if ($result) {
+            $value = $result->fetch_assoc();
         $pre_runs = $value['runs'];
 
         $runs2 = $pre_runs + $runs;
+        }else{
+            $runs2 = $runs;
+        }
+        
 
 
         $query4 = "update score_board set runs=$runs2 where team_id = '$team_id'";
@@ -425,10 +450,17 @@ class Team
 
         $query = "select * from score_board where team_id = $team_id";
         $result = $this->db->select($query);
-        $value = $result->fetch_assoc();
-        $balls = $value['balls'];
-        $runs = $value['runs'];
-        $overs = $value['overs'];
+        if ($result) {
+            $value = $result->fetch_assoc();
+            $balls = $value['balls'];
+            $runs = $value['runs'];
+            $overs = $value['overs'];
+        }else{
+            $balls = 0;
+            $runs = 0;
+            $overs = 0;
+        }
+        
         $balls= $balls + 1;
         $overs1= (int)$overs;
         $overs = floor($overs1);
@@ -457,9 +489,9 @@ class Team
         $overs = $value['overs'];
         
         
+
         $overs1= (int)$overs;
         $overs = floor($overs1);
-        
         $pre_overs_balls = $overs*6;
         $rem_balls = $balls-$pre_overs_balls;
         if($rem_balls<6)
@@ -468,6 +500,7 @@ class Team
         }else{
             $overs = $overs+1;
         }
+
         
         
         $economy_rate = $runs/$overs;
@@ -513,7 +546,7 @@ class Team
 
         $query4 = "update score_board set target='$target' where team_id='$team_id'";
         $team = $this->db->update($query4);
-
+        
         $query4 = "update matches set decision=0 where team='$team_id'";
         $result4 = $this->db->update($query4);
 
@@ -531,6 +564,7 @@ class Team
         $query4 = "update battingtable set status='0',striker_status='0'";
         $result4 = $this->db->update($query4);
 
+        // echo '<script>window.location.replace("addOpener.php")</script>';
     }
 
     public function getAllValue(){
@@ -568,13 +602,15 @@ class Team
 
 
     }
-
+    
+    
     public function updateMatchSataus(){
 
         $query1 = "UPDATE matches SET status = 'Finish'";
         $result1 = $this->db->update($query1);
 
     }
+
 
 
     public function finishMatch(){
@@ -607,5 +643,210 @@ class Team
         $result9 = $this->db->update($query9);
 
         echo '<script>window.location.replace("addTeam.php")</script>';
+    }
+    public function check_openers(){
+
+        $query = "select * from battingtable";
+        $result = $this->db->select($query);
+        
+
+        if($result){
+            while ($result1=$result->fetch_assoc()) {
+                if ($result1['status'] == 1) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        else{
+            echo '<script>window.location.replace("addOpener.php")</script>';
+        }
+    }
+
+
+    public function save_history($bowl_id,$striker,$runs,$run_type,$newPlayer,$outPlayer){
+
+       $query = "UPDATE ball_history SET bowler_id='$bowl_id',batting_player_id='$striker',runs='$runs',run_type='$run_type',new_player_id='$newPlayer',out_player_id='$outPlayer'";
+        $result = $this->db->update($query);
+
+    }
+
+    public function undoLastBall (){
+
+        $query = "select * from ball_history";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $player_id = $value['batting_player_id'];
+
+        $query2="select * from players where id='$player_id'";
+        $result2=$this->db->select($query2);
+        $value2 = $result2->fetch_assoc();
+        $team_id = $value2['team_id'];
+
+
+        $query3 = "select * from score_board where team_id = $team_id";
+        $result3 = $this->db->select($query3);
+        $value3 = $result3->fetch_assoc();
+        $pre_runs = $value3['runs'];
+        $pre_balls = $value3['balls'];
+        $overs = $value3['overs'];
+
+        $team_runs = $pre_runs - $value['runs'];
+        $team_balls = $pre_balls - 1;
+
+
+        $overs1= (int)$overs;
+        $overs = floor($overs1);
+        $pre_overs_balls = $overs*6;
+        $rem_balls = $team_balls-$pre_overs_balls;
+        if($rem_balls<6)
+        {
+        $overs = $overs.'.'.$rem_balls;
+        }else{
+            $overs = $overs+1;
+        }
+
+
+        $query4 = "update score_board set runs='$team_runs',balls='$team_balls',overs='$overs' where team_id='$team_id'";
+        $team = $this->db->update($query4);
+
+
+$runs = $value['runs'];
+        $striker = $value['batting_player_id'];
+        $query5 = "select * from battingtable where player_id = '$striker'";
+        $result5 = $this->db->select($query5);
+        $value5 = $result5->fetch_assoc();
+        $ball_faced = $value5['ball_faced'];
+        $pre_runs = $value5['runs'];
+        $ball_faced= $ball_faced - 1;
+
+        
+        $batting_runs = $pre_runs - $runs;
+
+        $query = "update battingtable set ball_faced='$ball_faced',runs='$batting_runs'  where player_id = '$striker'";
+        $result = $this->db->update($query);
+
+
+
+        $bowler_id = $value['bowler_id'];
+        $query6 = "select * from bowlingtable where player_id = '$bowler_id'";
+        $result6 = $this->db->select($query6);
+        $value6 = $result6->fetch_assoc();
+        $balls_bowled = $value6['balls_bowled'];
+        $pre_runs = $value6['runs'];
+        $balls_bowled= $balls_bowled - 1;
+
+        $bowling_runs = $pre_runs - $runs;
+
+        $query = "update bowlingtable set balls_bowled='$balls_bowled',runs='$bowling_runs' where player_id = '$bowler_id'";
+        $result = $this->db->update($query);
+
+
+        $newPlayer = $value['new_player_id'];
+        $out_player_id = $value['out_player_id'];
+        if ($out_player_id) {
+            $this->undoOutPlayer($out_player_id,$newPlayer);
+        }
+        
+
+    }
+
+    public function undoOutPlayer($out_player_id, $newPlayer){
+
+        // $query2="select * from battingtable where player_id='$outPlayer'";
+
+        $query2 = "SELECT * FROM battingtable WHERE player_id='$out_player_id'";
+        $result2=$this->db->select($query2);
+
+        if ($result2!=false) {
+           // $query = "update battingtable set status = '0', striker_status = '0' where player_id='$outPlayer'";
+           //  $result = $this->db->update($query);
+            
+            
+            $query3="select * from players where id='$out_player_id'";
+            $result3=$this->db->select($query3);
+
+            $value = $result3->fetch_assoc();
+            $team_id = $value['team_id'];
+
+
+            $query = "select * from score_board where team_id = $team_id";
+            $result = $this->db->select($query);
+            $value = $result->fetch_assoc();
+            $pre_out = $value['no_of_outs'];
+            $out= $pre_out - 1;
+
+
+
+
+            $query4 = "update score_board set no_of_outs='$out' where team_id = '$team_id'";
+            $result4 = $this->db->update($query4);
+
+
+
+            $value = $result2->fetch_assoc();
+            if ($value['striker_status'] == 1) {
+
+                $query = "update battingtable set status = '1', striker_status = '1' where player_id='$out_player_id'";
+                $result = $this->db->update($query);
+
+                // $query2 = "INSERT INTO battingtable(player_id,status,striker_status) VALUES('$newPlayer','1','1')";
+
+                $query2 = "DELETE from battingtable where player_id = '$newPlayer'";
+
+                $this->db->delete($query2);
+            }else{
+                $query = "update battingtable set status = '1', striker_status = '0' where player_id='$out_player_id'";
+                $this->db->update($query);
+
+                // $query2 = "INSERT INTO battingtable(player_id,status,striker_status) VALUES('$newPlayer','1','1')";
+
+                $query2 = "DELETE from battingtable where player_id = '$newPlayer'";
+
+                $this->db->delete($query2);
+            }
+        }
+        $query3 = "update players set status='0' where id='$newPlayer'";
+        $result3 = $this->db->update($query3);  
+    }
+
+    public function remaningBallsAndRuns(){
+
+        $query = "select * from matches where decision = '1'";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $team_id = $value['team'];
+        $overs = $value['over'];
+
+
+        $query = "select * from matches where decision = '0'";
+        $result = $this->db->select($query);
+        $value = $result->fetch_assoc();
+        $target = $value['target'];
+
+
+
+        $query2 = "select * from score_board where team_id = '$team_id'";
+        $result2 = $this->db->select($query2);
+        $value2 = $result2->fetch_assoc();
+        $balls = $value2['balls'];
+        $runs = $value2['runs'];
+
+        $totall_balls = $overs * 6;
+
+        $remaining_Balls = $totall_balls - $balls;
+
+        if ($target>0) {
+            $remainingruns = $target - $runs;
+        }else{
+            $remainingruns = "";
+        }
+       
+
+        $query3 = "update score_board set remainingball='$remaining_Balls',remainingruns = '$remainingruns' where team_id='$team_id'";
+        $result3 = $this->db->update($query3);  
+
+
+
     }
 }

@@ -39,6 +39,8 @@ $db=new Database();
 
 $data=array();
 $team=getallTeam();
+if($team!=false)
+{
 $i=1;
 while ($detail=$team->fetch_assoc()) 
 { 
@@ -47,15 +49,24 @@ while ($detail=$team->fetch_assoc())
 	$i++;	
 	
 }
+}
+
 $st=getStadium();
+if($st!=false)
+{
 $stm=$st->fetch_assoc();
 $data["cstadium"]=$stm['stadium'];
-
+$data['batingteam']=getBatingTeam();
+}
 $cteam=getCommingTeam();
 $cteams=$cteam->fetch_assoc();
 
 $data['uteam1']=$cteams['teamAName'];
 $data['uteam2']=$cteams['teamAName'];
 $data['ustadium']=$cteams['stadium'];
-$data['batingteam']=getBatingTeam();
+
 echo json_encode($data);
+
+
+
+
