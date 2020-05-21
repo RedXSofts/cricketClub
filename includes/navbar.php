@@ -84,7 +84,7 @@
                             <a href="addMatch.php">Add Match</a>
                         </li>
                         <li>
-                            <a href="matchBreak.php">Match Break</a>
+                            <a href="matchBreak.php">Update Match Status</a>
                         </li>
                         <li>
                             <a href="updateValue.php">Update Values</a>

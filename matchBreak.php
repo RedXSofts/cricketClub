@@ -80,13 +80,14 @@
                                     ?>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Choose Status</label>
-                                            <select name="status" class="form-control">
+                                            <label>Enter Match Status</label>
+                                            <!-- <select name="status" class="form-control">
                                                 <option>choose status</option>
                                                 <option>Continue</option>
                                                 <option>Break</option>
                                                 <option>Cancel</option>
-                                            </select>
+                                            </select> -->
+                                            <input type="text" name="status">
                                         </div>
                                     </div>
                                 </div>

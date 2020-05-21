@@ -26,10 +26,7 @@ class Team
 
     public function updateStatus($status)
     {
-        // $match = "SELECT * FROM matches";
-        // $res = $this->db->select($match);
-        // $res = $res->fetch_assoc();
-        // $id = $res['id'];
+        
 
      $query = "UPDATE matches SET status='$status'";
      $result = $this->db->update($query);
@@ -368,7 +365,12 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`star
 
         $pre_runs = $this->getRunsByPlayerId($striker, "battingtable");
 
-        $totallruns = $pre_runs + $runs;
+        if ($runs>=0) {
+            $totallruns = $pre_runs + $runs;
+        }else{
+            $runs = 0;
+        }
+        
 
         if ($runs == 4) {
             $query = "select * from battingtable where player_id = $striker";
@@ -606,8 +608,7 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`star
 
 
     }
-    
-    
+
     public function updateMatchSataus(){
 
         $query1 = "UPDATE matches SET status = 'Finish'";

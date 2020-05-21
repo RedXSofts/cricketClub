@@ -57,13 +57,19 @@
         $striker=$_POST['striker'];
         $runs=$_POST['runs'];
 		$runType=$_POST['runType'];
-        $match_status=$_POST['match_status'];
+        // $match_status=$_POST['match_status'];
         $nonStriker=$_POST['nonStriker'];
         $newStriker=$_POST['newStriker'];
         $outPlayer = $_POST['outPlayer'];
 		$newPlayer=$_POST['newPlayer'];
         $bowler=$_POST['bowler'];
         $newBowler=$_POST['newBowler'];
+
+        // if ($match_status != "") {
+        //     $tm->updateMatchSatausByPara($match_status);
+        //     echo '<script>window.location.replace("addScore.php")</script>';
+        // }
+
         if ($newStriker) {
         $tm->updateStriker($newStriker);
         }
@@ -80,9 +86,7 @@
             }
             // echo '<script>window.location.replace("addScore.php")</script>';
         }
-        if ($match_status != "") {
-            $tm->updateMatchSatausByPara($match_status);
-        }
+        
         if ($newBowler) {
             $tm->updateBowler($bowler, $newBowler);
             echo '<script>window.location.replace("addScore.php")</script>';
@@ -171,10 +175,10 @@
                                    </select>
 								</div>
 
-                                <div class="form-group">
+                               <!--  <div class="form-group">
                                 <label>Match Status:</label>
                                 <input class="form-control" name="match_status" placeholder="Enter Match Status">
-                            </div>
+                            </div> -->
                             
                             </div>
 

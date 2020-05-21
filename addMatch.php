@@ -126,7 +126,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Match Start Time:</label>
-                                    <input class="form-control" name="time" type="time" required>
+                                    <input class="form-control" name="time" type="datetime-local" required>
                                 </div>
 
                             </div>
