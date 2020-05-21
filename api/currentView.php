@@ -62,7 +62,7 @@ $cteam=getCommingTeam();
 $cteams=$cteam->fetch_assoc();
 
 $data['uteam1']=$cteams['teamAName'];
-$data['uteam2']=$cteams['teamAName'];
+$data['uteam2']=$cteams['teamBName'];
 $data['ustadium']=$cteams['stadium'];
 
 echo json_encode($data);

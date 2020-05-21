@@ -41,8 +41,9 @@
 
     <!-- Navigation -->
     <?php include_once 'includes/navbar.php'?>
-
+    
     <?php
+    // session_start();
     include_once 'classes/Team.php';
 	$tm=new Team();
 
@@ -70,13 +71,13 @@
                 $tm->updateLastBAll($runType);
                 $tm->updateExtras($runs,$striker);
                 $tm->remaningBallsAndRuns();
-                
             }else{
                 $tm->updateLastBAll($runs);
-                $tm->updateRun($runs, $striker, $bowler);
+                 $_SESSION['balls']=$re_balls = $tm->updateRun($runs, $striker, $bowler);
+
                 $tm->remaningBallsAndRuns();
             }
-            echo '<script>window.location.replace("addScore.php")</script>';
+            // echo '<script>window.location.replace("addScore.php")</script>';
         }
         if ($newBowler) {
             $tm->updateBowler($bowler, $newBowler);
@@ -314,8 +315,15 @@
                     <div class="panel-body">
                                  <div class="row">
                                      <div style="color:red; text-align: center; font-size:16px;"><?php
-                                         if (isset($_POST['addteam'])) {
-                                             echo "$check";
+                                         if (isset($_POST['update'])) {
+                                            
+                                            if ($_SESSION['balls'] == 6) {
+                                                echo "<script>alert('Please Change Your Bowler!!')</script>";
+                                            }else{
+                                            // echo $_SESSION['balls'];
+
+                                            }
+                                             
                                          }
                                          ?>
                                   </div>

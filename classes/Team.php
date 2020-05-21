@@ -429,7 +429,9 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`star
         $result4 = $this->db->update($query4);
 
 
-        $this->updateBalls($striker, $bowler, $team_id);
+        $re_balls = $this->updateBalls($striker, $bowler, $team_id);
+
+        return $re_balls;
 
     }
     public function updateBalls($striker, $bowler, $team_id){
@@ -493,7 +495,7 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`star
         $overs1= (int)$overs;
         $overs = floor($overs1);
         $pre_overs_balls = $overs*6;
-        $rem_balls = $balls-$pre_overs_balls;
+        $rem_balls = $balls_bowled-$pre_overs_balls;
         if($rem_balls<6)
         {
         $overs = $overs.'.'.$rem_balls;
@@ -507,6 +509,8 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`star
 
         $query4 = "update bowlingtable set overs='$overs', balls_bowled='$balls_bowled',economy_rate='$economy_rate' where player_id = '$bowler'";
         $result4 = $this->db->update($query4);
+
+        return $rem_balls;
 
     }
     public function updateExtras($extra,$player_id){
@@ -819,10 +823,15 @@ $runs = $value['runs'];
         $overs = $value['over'];
 
 
-        $query = "select * from matches where decision = '0'";
-        $result = $this->db->select($query);
-        $value = $result->fetch_assoc();
-        $target = $value['target'];
+        // $query = "select * from matches where decision = '0'";
+        // $result = $this->db->select($query);
+        // if ($result) {
+        //     $value = $result->fetch_assoc();
+        //     $target = $value['target'];
+        // }else{
+        //     $target = 0;
+        // }
+        
 
 
 
@@ -835,6 +844,12 @@ $runs = $value['runs'];
         $totall_balls = $overs * 6;
 
         $remaining_Balls = $totall_balls - $balls;
+
+        $query2 = "select * from score_board where team_id <> '$team_id'";
+        $result2 = $this->db->select($query2);
+        $value2 = $result2->fetch_assoc();
+        $target = $value2['target'];
+
 
         if ($target>0) {
             $remainingruns = $target - $runs;
