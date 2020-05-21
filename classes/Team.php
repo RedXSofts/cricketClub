@@ -614,6 +614,12 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`star
         $result1 = $this->db->update($query1);
 
     }
+    public function updateMatchSatausByPara($status){
+
+        $query1 = "UPDATE matches SET status = '$status'";
+        $result1 = $this->db->update($query1);
+
+    }
 
 
 

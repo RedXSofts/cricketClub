@@ -57,6 +57,7 @@
         $striker=$_POST['striker'];
         $runs=$_POST['runs'];
 		$runType=$_POST['runType'];
+        $match_status=$_POST['match_status'];
         $nonStriker=$_POST['nonStriker'];
         $newStriker=$_POST['newStriker'];
         $outPlayer = $_POST['outPlayer'];
@@ -78,6 +79,9 @@
                 $tm->remaningBallsAndRuns();
             }
             // echo '<script>window.location.replace("addScore.php")</script>';
+        }
+        if ($match_status != "") {
+            $tm->updateMatchSatausByPara($match_status);
         }
         if ($newBowler) {
             $tm->updateBowler($bowler, $newBowler);
@@ -153,7 +157,7 @@
                             <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Runs:</label>
-								<input class="form-control" name="runs" placeholder="Enter Overs">
+								<input class="form-control" name="runs" placeholder="Enter Runs">
                             </div>
 
 								<div class="form-group">
@@ -166,6 +170,11 @@
                                        <option value="BY">BY</option>
                                    </select>
 								</div>
+
+                                <div class="form-group">
+                                <label>Match Status:</label>
+                                <input class="form-control" name="match_status" placeholder="Enter Match Status">
+                            </div>
                             
                             </div>
 
