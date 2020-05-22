@@ -65,6 +65,8 @@
         $bowler=$_POST['bowler'];
         $newBowler=$_POST['newBowler'];
 
+        
+
         // if ($match_status != "") {
         //     $tm->updateMatchSatausByPara($match_status);
         //     echo '<script>window.location.replace("addScore.php")</script>';
@@ -73,7 +75,7 @@
         if ($newStriker) {
         $tm->updateStriker($newStriker);
         }
-        if ($runs or $runs == 0) {
+        if (($runs or $runs == 0) and $runs != "") {
             if ($runType) {
                 $tm->updateLastBAll($runType);
                 $tm->updateExtras($runs,$striker);
@@ -105,6 +107,15 @@
         $tm->resetBall();
         $tm->changeTeam($striker);
         
+    }
+    if (isset($_POST['status'])) {
+        $ball_status=$_POST['ball_status'];
+
+
+        if ($ball_status) {
+            $tm->updateLastBAllStatus($ball_status);
+        }
+
     }
     if (isset($_POST['finish'])) {
 
@@ -174,6 +185,13 @@
                                        <option value="BY">BY</option>
                                    </select>
 								</div>
+                                <div class="form-group">
+                                    <label>Ball Status:</label>
+                                    <select class="form-control" name="ball_status">
+                                       <option value="">Choose Ball Status</option>
+                                       <option value="Running">Running</option>
+                                   </select>
+                                </div>
 
                                <!--  <div class="form-group">
                                 <label>Match Status:</label>
@@ -389,6 +407,7 @@
             </div>
             <div class="col-lg-12 text-center">
                             <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Data</button>
+                            <button type="submit" name="status" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Ball Status</button>
                             <button type="submit" onclick="return confirm('Are You Sure To Undo Last Ball')" name="undo" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Undo Last Ball</button>
                             <button type="submit" onclick="return confirm('Are You Sure To Change Team')" name="change" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Change Team</button>
                             <button type="submit" name="finish" onclick="return confirm('Are you sure to finish Match!')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>

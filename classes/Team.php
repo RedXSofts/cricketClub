@@ -26,7 +26,7 @@ class Team
 
     public function updateStatus($status)
     {
-        
+
 
      $query = "UPDATE matches SET status='$status'";
      $result = $this->db->update($query);
@@ -598,9 +598,15 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`star
         $arr[4] =$result1['b5'];
         $arr[5] =$result1['b6'];
 
-        $query1 = "UPDATE sixballs SET b1='$arr[1]',b2='$arr[2]',b3='$arr[3]',b4='$arr[4]',b5='$arr[5]',b6='$value'";
+        $query1 = "UPDATE sixballs SET b1='$arr[1]',b2='$arr[2]',b3='$arr[3]',b4='$arr[4]',b5='$arr[5]',b6='$value',last_status='$value'";
         $result1 = $this->db->update($query1);
     }
+    public function updateLastBAllStatus($value){
+
+        $query1 = "UPDATE sixballs SET last_status='$value'";
+        $result1 = $this->db->update($query1);
+    }
+
     public function resetBall(){
         
         $query1 = "UPDATE sixballs SET b1='0',b2='0',b3='0',b4='0',b5='0',b6='0'";
