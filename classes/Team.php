@@ -39,19 +39,7 @@ class Team
 	}
 	public function createMatch($team,$decision,$stadium,$over,$time)
 	{
-	   // $status = 'continue';
-	    
-	   // $data = [
-    //         'team' => $team,
-    //         'decision' => $decision,
-    //         'stadium' => $stadium,
-    //     ];
-    //     $sql = "INSERT INTO users (name, surname, sex) VALUES (:name, :surname, :sex)";
-    //     $stmt= $pdo->prepare($sql);
-    //     $stmt->execute($data);
-	    
-// 		$query = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','1','$decision','$stadium','$over','$status')";
-		
+
 		$query = "INSERT INTO matches(`team`,`toss`,`over`,`decision`,`stadium`,`status`,`start_time`) VALUES($team,'1',$over,'$decision','$stadium','continue','$time')";
 		$result = $this->db->insert($query);
 
@@ -68,7 +56,7 @@ class Team
 
 // 		$query1 = "INSERT INTO matches(team,toss,decision,stadium,over,status) VALUES('$team','0,'$decision','$stadium','$over','$status')";
 
-$query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`start_time`) VALUES('$team','$over','$decision','$stadium','continue','$time')";
+        $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`start_time`) VALUES('$team','$over','$decision','$stadium','continue','$time')";
 		$result1 = $this->db->insert($query1);
 
         $query3 = "INSERT INTO score_board(team_id) VALUES('$team')";
@@ -260,11 +248,18 @@ $query1 = "INSERT INTO matches(`team`,`over`,`decision`,`stadium`,`status`,`star
         return $result;
     }
 
+    public function addCteam($team_one,$team_two,$location)
+    {
+        $query = "INSERT INTO cteam(teamAName,teamBName,stadium) VALUES('$team_one','$team_two','$location')";
+        $result = $this->db->insert($query);
+        // $query = "update cteam set teamAName='$team_one',teamBName='$team_two',stadium='$location'";
+        //     $result = $this->db->update($query);
+    }
+
     public function updateCteam($team_one,$team_two,$location)
     {
         $query = "update cteam set teamAName='$team_one',teamBName='$team_two',stadium='$location'";
             $result = $this->db->update($query);
-
     }
     public function getAllCTeam(){
         $query="select * from cteam";

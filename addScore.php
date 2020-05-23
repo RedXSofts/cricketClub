@@ -193,6 +193,7 @@
                                    </select>
                                 </div>
 
+                                <button type="submit" name="status" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Ball Status</button>
                                <!--  <div class="form-group">
                                 <label>Match Status:</label>
                                 <input class="form-control" name="match_status" placeholder="Enter Match Status">
@@ -407,7 +408,7 @@
             </div>
             <div class="col-lg-12 text-center">
                             <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Data</button>
-                            <button type="submit" name="status" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Ball Status</button>
+                            
                             <button type="submit" onclick="return confirm('Are You Sure To Undo Last Ball')" name="undo" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Undo Last Ball</button>
                             <button type="submit" onclick="return confirm('Are You Sure To Change Team')" name="change" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Change Team</button>
                             <button type="submit" name="finish" onclick="return confirm('Are you sure to finish Match!')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>
