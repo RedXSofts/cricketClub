@@ -256,13 +256,34 @@ class Team
         //     $result = $this->db->update($query);
     }
 
-    public function updateCteam($team_one,$team_two,$location)
+    public function updateCteam($team_one,$team_two,$location,$id)
     {
-        $query = "update cteam set teamAName='$team_one',teamBName='$team_two',stadium='$location'";
+        $query = "update cteam set teamAName='$team_one',teamBName='$team_two',stadium='$location' where id='$id'";
             $result = $this->db->update($query);
     }
+
+    public function deleteCTeam($id){
+        $query = "DELETE FROM cteam where id='$id'";
+        $result = $this->db->delete($query);
+    }
+
+    // public function addCTeam($teamAName,$teamBName,$location){
+
+    //     $query4 = "INSERT INTO cteam(teamAName,teamBName,stadium) VALUES('$teamAName','$teamBName','$location')";
+
+    //         $result = $this->db->insert($query4);
+    //         if ($result) {
+    //             return 'Successfully Team Added';
+    //         }
+
+    // }
     public function getAllCTeam(){
         $query="select * from cteam";
+        $result=$this->db->select($query);
+        return $result;
+    }
+     public function getAllCTeamById($id){
+        $query="select * from cteam where id='$id'";
         $result=$this->db->select($query);
         return $result;
     }

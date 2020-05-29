@@ -46,8 +46,8 @@
     include_once 'classes/Team.php';
     $tm=new Team();
 
-    $teamdate=$tm->getAllCTeam();
-    $team=$teamdate->fetch_assoc();
+    $id = $_GET['edit'];
+    
 
     if (isset($_POST['addteam']))
     {
@@ -55,8 +55,14 @@
         $team_name1=$_POST['team_one'];
         $team_name2=$_POST['team_two'];
         $location=$_POST['location'];
-        $check = $tm->updateCteam($team_name1,$team_name2,$location);
+        $check = $tm->updateCteam($team_name1,$team_name2,$location,$id);
+
+
     }
+
+    $teamdate=$tm->getAllCTeamById($id);
+    $team=$teamdate->fetch_assoc();
+
 
     ?>
 
@@ -75,7 +81,7 @@
                         <b>Add Coming Team</b>
                     </div>
                     <div class="panel-body">
-                        <form role="form" class="col-lg-12" method="post" action="cteam.php">
+                        <form role="form" class="col-lg-12" method="post">
                             <div class="row">
                                 <div style="color:red; text-align: center; font-size:16px;"><?php
                                     if (isset($_POST['addteam'])) {
@@ -104,7 +110,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 text-center">
-                                <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Team</button>
+                                <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Update Team</button>
                                 <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
                             </div>
                         </form>

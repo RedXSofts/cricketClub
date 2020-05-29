@@ -62,7 +62,7 @@
                             <a href="teamList.php">Manage Teams</a>
                         </li>
                         <li>
-                            <a href="cteam.php">Upcoming Teams</a>
+                            <a href="cTeamList.php">Upcoming Teams</a>
                         </li>
                     </ul>
                 </li>

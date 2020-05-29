@@ -2,8 +2,8 @@
 
 Class Database{
  public $host   = "localhost";
- public $user   = "admin_one";
- public $pass   = "gc8Y0(pKGuHM";
+ public $user   = "root";
+ public $pass   = "";
  public $dbname = "admin_db";
  
  
