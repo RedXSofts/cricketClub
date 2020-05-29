@@ -612,14 +612,31 @@ class Team
 
     public function updateMatchSataus(){
 
-        $query1 = "UPDATE matches SET status = 'Finish'";
+        $query1 = "UPDATE matches SET status = 'Finish', decision = '0'";
         $result1 = $this->db->update($query1);
+        $query8 = "UPDATE battingtable SET status='0',striker_status = '0'";
+        $result8 = $this->db->update($query8);
+
+
+        $query8 = "UPDATE bowlingtable SET status='0'";
+        $result8 = $this->db->update($query8);
+
+        $query8 = "UPDATE sixballs SET b1='0',b2='0',b3='0',b4='0',b5='0',b6='0'";
+        $result8 = $this->db->update($query8);
+
+        $query9 = "UPDATE bettable SET teamAv1='0',teamAv2='0',sessionOverV1='0',sessionOverV2='0',xBollV1='0',xBollV2='0'";
+        $result9 = $this->db->update($query9);
+
+        echo '<script>window.location.replace("addMatch.php")</script>';
+
 
     }
     public function updateMatchSatausByPara($status){
 
         $query1 = "UPDATE matches SET status = '$status'";
         $result1 = $this->db->update($query1);
+
+        
 
     }
 
@@ -630,8 +647,6 @@ class Team
         $query = "DELETE FROM matches";
         $result = $this->db->delete($query);
 
-        $query2 = "DELETE FROM team";
-        $result2 = $this->db->delete($query2);
 
         $query3 = "DELETE FROM battingtable";
         $result3 = $this->db->delete($query3);
@@ -639,14 +654,10 @@ class Team
         $query4 = "DELETE FROM bowlingtable";
         $result4 = $this->db->delete($query4);
 
-        $query5 = "DELETE FROM players";
-        $result5 = $this->db->delete($query5);
 
         $query6 = "DELETE FROM score_board";
         $result6 = $this->db->delete($query6);
 
-        $query7 = "DELETE FROM players";
-        $result7 = $this->db->delete($query7);
 
         $query8 = "UPDATE sixballs SET b1='0',b2='0',b3='0',b4='0',b5='0',b6='0'";
         $result8 = $this->db->update($query8);

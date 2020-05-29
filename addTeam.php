@@ -67,11 +67,11 @@
         <!-----New Row---->
         <div class="row">
             <div class="col-lg-6">
-                <?php if($tm->count_teams() >= 2 ): ?>
-                   <?php  echo '<script type="text/javascript">alert("Both Teams Added Susseccfully");</script>'; 
-                   echo '<script>window.location.replace("teamList.php")</script>';
+                <!-- <?php if($tm->count_teams() >= 2 ): ?>
+                   <?php  /*echo '<script type="text/javascript">alert("Both Teams Added Susseccfully");</script>'; 
+                   echo '<script>window.location.replace("teamList.php")</script>';*/
                    ?>
-                <?php endif; ?>
+                <?php endif; ?> -->
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <b>Add Team</b>
@@ -100,12 +100,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 text-center">
-                                <?php if ($tm->count_teams() >= 2): ?>
-                            <button  class="btn btn-primary" disabled="true"><i class="fa fa-sign-out fa-fw"></i> Can't add Team</button>
-                                <?php else: ?>
                                     <button type="submit" name="addteam" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Add Team</button>
                                     <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button>
-                                <?php endif; ?>
                             </div>
                         </form>
 

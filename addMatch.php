@@ -47,12 +47,19 @@
 	$tm=new Team();
     if (isset($_POST['addteam']))
     {
+
         $team=$_POST['team'];
+        $oppo_team = $_POST['oppo-team'];
 		$decision=$_POST['decision'];
 		$stadium=$_POST['stadium'];
 		$over=$_POST['over'];
         $time=$_POST['time'];
-        $check = $tm->createMatch($team,$decision,$stadium,$over,$time);
+        if ($team == $oppo_team) {
+            echo '<script>alert("Please Choose Two Different Teams")</script>';
+            echo '<script>window.location.replace("addMatch.php")</script>';
+        }
+
+        $check = $tm->createMatch($team,$decision,$stadium,$over,$time,$oppo_team);
         // $tm->resetBall();
     }
 
@@ -76,7 +83,7 @@
                     <div class="panel-heading">
                         <b>Add Match</b>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body panel-lg">
                         <form role="form" class="col-lg-12" method="post" action="addMatch.php">
                                  <div class="row">
                                      <div style="color:red; text-align: center; font-size:16px;"><?php
@@ -106,9 +113,27 @@
 									<label>Overs:</label>
 									<input class="form-control" name="over" placeholder="Enter Overs" required>
 								</div>
-                            
+                                <div class="form-group">
+                                    <label>Match Start Time:</label>
+                                    <input class="form-control" name="time" type="datetime-local" required>
+                                </div>
+
                             </div>
                             <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Opponent Team</label>
+                                   <select class="form-control" name="oppo-team" required>
+                                    <option value="">Choose Opponent Team</option>
+                                    <?php
+                                    $get=$tm->getAllTeam();
+                                    if($get)
+                                    {
+                                        while ($value=$get->fetch_assoc())
+                                        {  ?>
+                                            <option value="<?php echo $value['id']; ?>"><?php echo $value['teamName']; ?></option>
+                                        <?php }} ?>
+                                </select>
+                                </div>
                                 <div class="form-group">
                                     <label>Choose Decision:</label>
                                    <select class="form-control" name="decision" required>
@@ -123,13 +148,7 @@
 								</div>
 
 							</div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Match Start Time:</label>
-                                    <input class="form-control" name="time" type="datetime-local" required>
-                                </div>
-
-                            </div>
+                            
 
                             <div class="col-lg-12 text-center">
                                 <?php if($tm->any_match()): ?>

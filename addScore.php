@@ -406,7 +406,107 @@
                 </div>
                 <!-- /.panel -->
             </div>
-            <div class="col-lg-12 text-center">
+            
+            
+
+            </div>
+
+            <?php
+
+
+       $valuedate=$tm->getAllValue();
+       if ($valuedate) {
+        $value=$valuedate->fetch_assoc();
+       }
+    if (isset($_POST['updateValue']))
+    {
+      
+        $teamAv1=$_POST['teamAv1'];
+        $teamAv2=$_POST['teamAv2'];
+        $sessionOverV1=$_POST['sessionOverV1'];
+        $sessionOverV2=$_POST['sessionOverV2'];
+        $xBollV1=$_POST['xBollV1'];
+        $xBollV2=$_POST['xBollV2'];
+        $check = $tm->updateValue($teamAv1,$teamAv2,$sessionOverV1,$sessionOverV2,$xBollV1,$xBollV2);
+        echo '<script>window.location.replace("addScore.php")</script>';
+    }
+
+    ?>
+    
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <b>Update Values</b>
+                    </div>
+                    <div class="panel-body">
+                        <!-- <form role="form" class="col-lg-7" method="post" action=""> -->
+                                 <div class="row">
+                                     <div style="color:red; text-align: center; font-size:16px;"><?php
+                                         // if (isset($_POST['updateValue'])) {
+                                         //     echo "$check";
+                                         // }
+                                         ?>
+                                  </div>
+                                 </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Team A Value 1:</label>
+                                    <input class="form-control" value="<?php echo $value['teamAv1'];?>"  required type="text" name="teamAv1"  placeholder="Enter Name" />
+                                </div>
+                            
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Team A Value 2:</label>
+                                    <input class="form-control" value="<?php echo $value['teamAv2']; ?>" required type="text"  name="teamAv2" placeholder="Enter Location" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Session Over V1:</label>
+                                    <input class="form-control" value="<?php echo $value['sessionOverV1']; ?>"  required type="text" name="sessionOverV1"  placeholder="Enter Name" />
+                                </div>
+                            
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Session Over V2:</label>
+                                    <input class="form-control" value="<?php echo $value['sessionOverV2']; ?>" required type="text"  name="sessionOverV2" placeholder="Enter Location" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>
+                                    Add Team Name:</label>
+                                    <input class="form-control" value="<?php echo $value['xBollV1']; ?>"  required type="text" name="xBollV1"  placeholder="Enter Name" />
+                                </div>
+                            
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Add Session Over:</label>
+                                    <input class="form-control" value="<?php echo $value['xBollV2']; ?>" required type="text"  name="xBollV2" placeholder="Enter Location" />
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-12 text-center">
+                            <button type="submit" name="updateValue" class="btn btn-primary"><i class="fa fa-sign-out fa-fw"></i> Update Value</button>
+                            <!-- <button type="reset" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i> Reset</button> -->
+                            </div>
+                        <!-- </form> -->
+
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+
+        </div>
+            <div class="row">
+            <div class="col-lg-12 text-center" style="margin-bottom:3%;">
                             <button type="submit" name="update" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Update Data</button>
                             
                             <button type="submit" onclick="return confirm('Are You Sure To Undo Last Ball')" name="undo" class="btn btn-primary"><i class="fa fa-sign-in fa-fw"></i> Undo Last Ball</button>
@@ -414,6 +514,7 @@
                             <button type="submit" name="finish" onclick="return confirm('Are you sure to finish Match!')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Finish Match</button>
                             <button type="submit" name="delete" onclick="return confirm('Are you sure to Delete Match! All Data will be Deleted')" class="btn btn-danger"><i class="fa fa-sign-out fa-fw"></i> Delete Match</button>
                         </form>
+                    
 
         </div>
         <!-- /.row -->
